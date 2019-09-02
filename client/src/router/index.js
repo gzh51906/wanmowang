@@ -1,7 +1,6 @@
 // 路由跳转
 
 import Vue from "vue";
-
 // 引入路由
 import VueRouter from "vue-router";
 
@@ -15,7 +14,15 @@ Vue.use(VueRouter);
 
 
 // 黄日隆引入的
-
+import Home from "../pages/home.vue";
+import Brand from "../pages/brand.vue";
+import Cloth from "../pages/cloth.vue";
+import Collocation from "../pages/collocation.vue";
+import Digital from "../pages/digital.vue";
+import Kitchen from "../pages/kitchen.vue";
+import Live from "../pages/live.vue";
+import Stationery from "../pages/stationery.vue";
+import Trip from "../pages/trip.vue";
 
 // 苏沛龙引入的
 
@@ -35,9 +42,48 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
-    routes: [
-
-    ]
+    routes: [{
+        name: 'home',
+        path: '/home',
+        component: Home
+    }, {
+        name: 'brand',
+        path: '/brand',
+        component: Brand
+    }, {
+        path: '/',
+        redirect: {
+            path: '/home'
+        }
+    }, {
+        name: 'cloth',
+        path: '/cloth',
+        component: Cloth
+    }, {
+        name: 'collocation',
+        path: '/collocation',
+        component: Collocation
+    }, {
+        name: 'digital',
+        path: '/digital',
+        component: Digital
+    }, {
+        name: 'kitchen',
+        path: '/kitchen',
+        component: Kitchen
+    }, {
+        name: 'live',
+        path: '/live',
+        component: Live
+    }, {
+        name: 'stationery',
+        path: '/stationery',
+        component: Stationery
+    }, {
+        name: 'trip',
+        path: '/trip',
+        component: Trip
+    }]
 })
 
 export default router;
