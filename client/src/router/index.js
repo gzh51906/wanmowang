@@ -29,6 +29,8 @@ import Trip from "../pages/trip.vue";
 // 苏沛龙引入的
 import mine from "../components/spl/mine.vue" //引入个人中心模块
 
+import reg from "../components/spl/reg.vue" //引入登录模块
+
 // 实例化路由
 let router = new VueRouter({
     //例子
@@ -103,6 +105,10 @@ let router = new VueRouter({
         name: "edit",
         path: "/edit",
         component: cEdit
+    }, {
+        name: "reg",
+        path: "/reg",
+        component: reg
     }]
 })
 
