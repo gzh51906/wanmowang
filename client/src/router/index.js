@@ -14,6 +14,7 @@ Vue.use(VueRouter);
 // 陈日兴引入的
 import cMore from "../components/crx/cMore.vue";
 import cCart from "../components/crx/cCart.vue";
+import cEdit from "../components/crx/cEdit.vue";
 
 // 黄日隆引入的
 
@@ -50,6 +51,10 @@ let router = new VueRouter({
         name: "cart",
         path: "/cart",
         component: cCart
+    }, {
+        name: "edit",
+        path: "/edit",
+        component: cEdit
     }]
 })
 

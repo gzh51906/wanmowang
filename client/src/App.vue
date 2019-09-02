@@ -13,9 +13,10 @@ export default {
 </script>
 
 <style>
-body{
+body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 #app {
   width: 100%;
