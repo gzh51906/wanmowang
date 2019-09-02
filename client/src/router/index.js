@@ -19,6 +19,7 @@ import cCart from "../components/crx/cCart.vue";
 
 
 // 苏沛龙引入的
+import mine from "../components/spl/mine.vue" //引入个人中心模块
 
 // 实例化路由
 let router = new VueRouter({
@@ -38,6 +39,10 @@ let router = new VueRouter({
      * 陈日兴引入cMore
      */
     routes: [{
+        name: mine,
+        path: "/mine",
+        component: mine
+    }, {
         name: "more",
         path: "/more",
         component: cMore
