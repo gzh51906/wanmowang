@@ -18,7 +18,9 @@ Vue.use(VueRouter);
 
 
 // 苏沛龙引入的
+import mine from "../components/spl/mine.vue" //引入个人中心模块
 
+import home from "../components/spl/home.vue" //引入首页模块（暂时）
 // 实例化路由
 let router = new VueRouter({
     //例子
@@ -35,9 +37,15 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
-    routes: [
-
-    ]
+    routes: [{
+        name: mine,
+        path: "/mine",
+        component: mine
+    }, {
+        name: "home",
+        path: "/home",
+        component: home
+    }]
 })
 
 export default router;
