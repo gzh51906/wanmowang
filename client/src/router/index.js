@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 // 引入单页面组件
 // import Home from "../pages/Home.vue";
 // 陈日兴引入的
-
+import cMore from "../components/crx/cMore.vue";
 
 // 黄日隆引入的
 
@@ -34,10 +34,13 @@ let router = new VueRouter({
     // }
     /** 
      * 不方便注释的地方在这里注释
+     * 陈日兴引入cMore
      */
-    routes: [
-
-    ]
+    routes: [{
+        name: "more",
+        path: "/more",
+        component: cMore
+    }]
 })
 
 export default router;
