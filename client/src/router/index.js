@@ -11,7 +11,8 @@ Vue.use(VueRouter);
 // 引入单页面组件
 // import Home from "../pages/Home.vue";
 // 陈日兴引入的
-
+import cMore from "../components/crx/cMore.vue";
+import cCart from "../components/crx/cCart.vue";
 
 // 黄日隆引入的
 import Home from "../pages/home.vue";
@@ -25,6 +26,7 @@ import Stationery from "../pages/stationery.vue";
 import Trip from "../pages/trip.vue";
 
 // 苏沛龙引入的
+import mine from "../components/spl/mine.vue" //引入个人中心模块
 
 // 实例化路由
 let router = new VueRouter({
@@ -41,6 +43,7 @@ let router = new VueRouter({
     // }
     /** 
      * 不方便注释的地方在这里注释
+     * 陈日兴引入cMore
      */
     routes: [{
         name: 'home',
@@ -83,6 +86,18 @@ let router = new VueRouter({
         name: 'trip',
         path: '/trip',
         component: Trip
+    }, {
+        name: mine,
+        path: "/mine",
+        component: mine
+    }, {
+        name: "more",
+        path: "/more",
+        component: cMore
+    }, {
+        name: "cart",
+        path: "/cart",
+        component: cCart
     }]
 })
 

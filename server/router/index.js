@@ -6,7 +6,7 @@ let Router = express.Router();
 // let user = require("./user");
 // 引入路由模块
 // 陈日兴引入
-let test = require("./crx/test.js");
+let cMore = require("./crx/cMore");
 // 黄日隆引入
 
 // 苏沛龙引入
@@ -31,7 +31,7 @@ Router.all('*', function (req, res, next) {
 // Router.use("/user", user);
 // 使用路由模块
 // 陈日兴引入
-Router.use("/crx", test);
+Router.use("/crx", cMore);
 // 黄日隆引入
 
 // 苏沛龙引入
