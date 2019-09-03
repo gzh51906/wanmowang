@@ -14,6 +14,7 @@ Vue.use(VueRouter);
 import cMore from "../components/crx/cMore.vue";
 import cCart from "../components/crx/cCart.vue";
 import cEdit from "../components/crx/cEdit.vue";
+import cLogin from "../components/crx/cLogin.vue";
 
 // 黄日隆引入的
 import Home from "../pages/home.vue";
@@ -28,8 +29,9 @@ import Trip from "../pages/trip.vue";
 
 // 苏沛龙引入的
 import mine from "../components/spl/mine.vue" //引入个人中心模块
-
 import reg from "../components/spl/reg.vue" //引入登录模块
+import server from "../components/spl/server.vue" //引入客服模块
+import presale from "../components/spl/presale.vue" //引入预售模块
 
 // 实例化路由
 let router = new VueRouter({
@@ -100,7 +102,10 @@ let router = new VueRouter({
     }, {
         name: "cart",
         path: "/cart",
-        component: cCart
+        component: cCart,
+        meta: {
+            authorCheck: true
+        }
     }, {
         name: "edit",
         path: "/edit",
@@ -109,7 +114,63 @@ let router = new VueRouter({
         name: "reg",
         path: "/reg",
         component: reg
+    }, {
+        name: "server",
+        path: "/server",
+        component: server,
+        meta: {
+            authorCheck: true
+        }
+    }, {
+        name: "presale",
+        path: "/presale",
+        component: presale
+    }, {
+        name: "login",
+        path: "/login",
+        component: cLogin
     }]
 })
+
+
+// 路由拦截
+import axios from 'axios';
+import store from "../store";
+router.beforeEach(async (to, from, next) => {
+    store.commit("typeChange");
+    store.commit("nameChange");
+    if (to.matched.some(item => item.meta.authorCheck)) {
+        let authorCheck = localStorage.getItem("authorCheck");
+        if (authorCheck) {
+            let type = await axios.get("http://127.0.0.1:1901/crx/verify", {
+                headers: {
+                    authorCheck
+                }
+            });
+            if (type.data.data.authorCheck) {
+                next();
+            } else {
+                localStorage.removeItem("authorCheck");
+                localStorage.removeItem("username");
+                next({
+                    path: '/login',
+                    query: {
+                        targetUrl: to.fullPath
+                    }
+                })
+            }
+        } else {
+            next({
+                path: '/login',
+                query: {
+                    targetUrl: to.fullPath
+                }
+            })
+        }
+    } else {
+        next();
+    }
+})
+
 
 export default router;

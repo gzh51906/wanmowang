@@ -4,8 +4,8 @@
       <button @click="back">
         <i class="el-icon-back"></i>
       </button>
-      <span class="register">注册</span>
-      <span class="login" @click="goto">登录</span>
+      <span class="login" @click="goto">注册</span>
+      <span class="register">登录</span>
     </div>
     <div class="main">
       <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
@@ -13,16 +13,12 @@
           <i class="el-icon-message"></i>
           <el-input type="text" v-model="ruleForm.cEmail" autocomplete="off" placeholder="请输入邮箱"></el-input>
         </el-form-item>
-        <el-form-item prop="cUsername">
-          <i class="el-icon-s-custom"></i>
-          <el-input type="text" v-model="ruleForm.cUsername" placeholder="请输入用户名"></el-input>
-        </el-form-item>
         <el-form-item prop="pass">
           <i class="el-icon-lock"></i>
           <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="regBtn" @click="submitForm('ruleForm')">注册</el-button>
+          <el-button class="regBtn" @click="submitForm('ruleForm')">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -34,8 +30,7 @@ export default {
     return {
       ruleForm: {
         pass: "",
-        cEmail: "",
-        cUsername: ""
+        cEmail: ""
       },
       rules: {
         pass: [
@@ -50,15 +45,6 @@ export default {
         cEmail: [
           { required: true, message: "邮箱不能为空", trigger: "blur" },
           { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" }
-        ],
-        cUsername: [
-          { required: true, message: "用户名不能为空", trigger: "blur" },
-          {
-            min: 3,
-            max: 20,
-            message: "请输入长度为3-20位的用户名",
-            trigger: "blur"
-          }
         ]
       }
     };
@@ -67,15 +53,27 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
-          let type = await this.$axios.post("http://127.0.0.1:1901/crx/reg", {
-            email: this.ruleForm.cEmail,
-            username: this.ruleForm.cUsername,
-            password: this.ruleForm.pass
-          });
-          if (type.data.code) {
-            this.$router.push("/login");
+          let { pass: password, cEmail: email } = this.ruleForm;
+          let result = await this.$axios.get(
+            "http://127.0.0.1:1901/crx/login",
+            {
+              params: {
+                email,
+                password
+              }
+            }
+          );
+          if (result.data.code) {
+            let targetUrl = this.$route.query.targetUrl || "/mine";
+            localStorage.setItem("authorCheck", result.data.data.authorCheck);
+            localStorage.setItem("username", result.data.data.username);
+            this.$store.commit("addDate", {
+              authorCheck: result.data.data.authorCheck,
+              username: result.data.data.username
+            });
+            this.$router.push(targetUrl);
           } else {
-            alert("邮箱或用户名已被注册");
+            alert("邮箱或者密码错误");
           }
         } else {
           return false;
@@ -86,7 +84,7 @@ export default {
       this.$router.push("/mine");
     },
     goto() {
-      this.$router.push("/login");
+      this.$router.push("/reg");
     }
   }
 };
@@ -112,7 +110,7 @@ export default {
   background: rgb(255, 215, 29);
 }
 .box {
-  background: url("./image/login_reg_bg.png");
+  background: url("../spl/image/login_reg_bg.png");
   background-size: 100%;
 }
 .main {
