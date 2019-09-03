@@ -1,218 +1,142 @@
 <template>
-  <div class="reg">
-    <div class="reg-head">
-      <i class="el-icon-back"></i>
-      <a href>
-        <b>注册</b>
-      </a>
-      <a href>
-        <b>登录</b>
-      </a>
+  <div class="box">
+    <div class="header">
+      <button @click="back">
+        <i class="el-icon-back"></i>
+      </button>
+      <span class="register">注册</span>
+      <span class="login">登录</span>
     </div>
-    <!-- <div class="form">
-      <div class="email">
-        <i class="el-icon-message"></i>
-        <input type="text" placeholder="请输入邮箱" />
-      </div>
-      <div class="name">
-        <i class="el-icon-cpu"></i>
-        <input type="text" placeholder="请输入昵称" />
-      </div>
-      <div class="password">
-        <i class="el-icon-lock"></i>
-        <input type="password" placeholder="请输入密码" />
-      </div>
-    </div>
-
-    <a href class="handon">注册</a>-->
-    <div class="form">
-      <el-form
-        v-model="dynamicValidateForm.email"
-        class="demo-dynamic"
-        :model="dynamicValidateForm"
-      >
-        <el-form-item
-          prop="email"
-          :rules="[
-      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
-    ]"
-        >
+    <div class="main">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+        <el-form-item prop="cEmail">
           <i class="el-icon-message"></i>
-          <el-input v-model="dynamicValidateForm.email" placeholder="请输入邮箱"></el-input>
+          <el-input type="text" v-model="ruleForm.cEmail" autocomplete="off" placeholder="请输入邮箱"></el-input>
         </el-form-item>
-      </el-form>
-
-      <el-form class="demo-ruleForm" :model="ruleForm" ref="ruleForm">
-        <el-form-item
-          prop="name"
-          :rules=" [
-            { required: true, message: '请输入昵称', trigger: 'blur' },
-            { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }
-          ]"
-        >
-          <i class="el-icon-cpu"></i>
-          <el-input v-model="ruleForm.name" placeholder="请输入昵称"></el-input>
+        <el-form-item prop="cUsername">
+          <i class="el-icon-s-custom"></i>
+          <el-input type="text" v-model="ruleForm.cUsername" placeholder="请输入用户名"></el-input>
         </el-form-item>
-        <el-form-item
-          prop="pass"
-          :rules=" [
-            { required: true, message: '请输入密码', trigger: 'blur' },
-            { min: 6, max: 18, message: '长度在 6 到 12 个字符', trigger: 'blur' }
-          ]"
-        >
+        <el-form-item prop="pass">
           <i class="el-icon-lock"></i>
-          <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码"></el-input>
+          <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button class="regBtn" @click="submitForm('ruleForm')">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 <script>
-// var emailReg = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/;
-
 export default {
   data() {
-    var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-      } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
-        }
-        callback();
-      }
-    };
     return {
-      dynamicValidateForm: {
-        domains: [
+      ruleForm: {
+        pass: "",
+        cEmail: "",
+        cUsername: ""
+      },
+      rules: {
+        pass: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
           {
-            value: ""
+            min: 6,
+            max: 18,
+            message: "请输入长度为6-18位的密码",
+            trigger: "blur"
           }
         ],
-        email: ""
-      },
-      ruleForm: {
-        name: ""
+        cEmail: [
+          { required: true, message: "邮箱不能为空", trigger: "blur" },
+          { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" }
+        ],
+        cUsername: [
+          { required: true, message: "用户名不能为空", trigger: "blur" },
+          {
+            min: 3,
+            max: 20,
+            message: "请输入长度为3-20位的用户名",
+            trigger: "blur"
+          }
+        ]
       }
     };
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
-          alert("submit!");
+          let type = await this.$axios.post("http://127.0.0.1:1901/crx/reg", {
+            email: this.ruleForm.cEmail,
+            username: this.ruleForm.cUsername,
+            password: this.ruleForm.pass
+          });
+          if (type.data.code) {
+            this.$router.push("/home");
+          } else {
+            alert("邮箱或用户名已被注册");
+          }
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    back() {
+      this.$router.push("/mine");
     }
   }
 };
 </script>
-
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-decoration: none;
-}
-.reg {
-  width: 100%;
-  height: 100%;
-  background-image: url(./image/login_reg_bg.png);
-  background-size: 100% auto;
-  min-height: 640px;
-}
-.reg-head {
-  width: 100%;
-  height: 45px;
-  line-height: 45px;
-  background-color: #fff;
-}
-.reg-head i {
-  font-size: 30px;
-  margin-left: 10px;
-  margin-top: 10px;
-}
-.reg-head a {
-  float: right;
-  color: #000;
-  font-size: 20px;
-  margin-right: 10px;
-}
-/* .form {
-  width: 100%;
-  margin-left: 12px;
-  margin-top: 340px;
-} */
-.form .email,
-.form .name,
-.form .password {
-  height: 40px;
-  width: 100%;
-  position: relative;
-  border-left: 1px solid #ccc;
-}
-.form .email i,
-.form .name i,
-.form .password i {
-  font-size: 20px;
-  position: absolute;
-  left: 8px;
-  top: 12px;
-}
-.form .email input,
-.form .name input,
-.form .password input {
-  height: 40px;
-  width: 300px;
-  padding-left: 30px;
-  /* border-left: 1px solid #ccc; */
-}
-.handon {
-  display: block;
-  width: 334px;
-  height: 40px;
-  background-color: #ffd71d;
-  color: #000;
-  text-align: center;
-  line-height: 40px;
-  margin-left: 12px;
-  margin-top: 15px;
-}
-.form {
-  margin-top: 340px;
-}
-.el-form {
-  /* margin-top: 340px; */
-  /* padding-right: 20px; */
-  width: 340px;
-}
 .el-form-item {
-  width: 340px;
   position: relative;
-  margin-top: 20px;
-  margin-left: 10px;
 }
 .el-form-item i {
   position: absolute;
+  display: block;
+  font-size: 16px;
+  z-index: 10;
+  color: rgb(51, 51, 51);
+  top: 13px;
   left: 0px;
-  top: 10px;
-  z-index: 2;
-  font-size: 20px;
-  color: rgb(182, 179, 179);
 }
-
-.el-input {
-  width: 340px;
-
-  /* padding: 0; */
-  box-sizing: border-box;
+.demo-ruleForm {
+  margin: 350px 10px 0;
+}
+.demo-ruleForm .regBtn {
+  width: 100%;
+  background: rgb(255, 215, 29);
+}
+.box {
+  background: url("./image/login_reg_bg.png");
+  background-size: 100%;
+}
+.main {
+  background: rgb(239, 239, 244);
+}
+.main > div > img {
+  display: block;
+  width: 100%;
+}
+.header {
+  height: 44px;
+  overflow: hidden;
+  background: white;
+}
+.header > button {
+  border: 0;
+  background: white;
+  font-size: 30px;
+  margin: 5px 0 0 10px;
+}
+.header > span {
+  color: #333;
+  float: right;
+  line-height: 44px;
+  margin-right: 10px;
+}
+.header .register {
+  font-weight: 600;
 }
 </style>
