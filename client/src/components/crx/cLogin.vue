@@ -15,7 +15,13 @@
         </el-form-item>
         <el-form-item prop="pass">
           <i class="el-icon-lock"></i>
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
+          <el-input
+            type="password"
+            v-model="ruleForm.pass"
+            autocomplete="off"
+            placeholder="请输入密码"
+            @keyup.13.native="submitForm('ruleForm')"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button class="regBtn" @click="submitForm('ruleForm')">登录</el-button>

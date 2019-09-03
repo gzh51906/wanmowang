@@ -32,6 +32,8 @@ import mine from "../components/spl/mine.vue" //引入个人中心模块
 import reg from "../components/spl/reg.vue" //引入登录模块
 import server from "../components/spl/server.vue" //引入客服模块
 import presale from "../components/spl/presale.vue" //引入预售模块
+import set from "../components/spl/set.vue" //引入设置退出模块
+import account from "../components/spl/account.vue" //引入账户模块
 
 // 实例化路由
 let router = new VueRouter({
@@ -129,6 +131,14 @@ let router = new VueRouter({
         name: "login",
         path: "/login",
         component: cLogin
+    }, {
+        name: "set",
+        path: "/set",
+        component: set
+    }, {
+        name: "account",
+        path: "/account",
+        component: account
     }]
 })
 

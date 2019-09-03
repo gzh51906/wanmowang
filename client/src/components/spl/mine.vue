@@ -3,8 +3,14 @@
     <div class="mine-head">
       <div class="mine-head-bc">
         <div class="touxiang">
-          <img src="./image/default_user_icon.png" alt />
-          <button @click="gotologin">登录/注册</button>
+          <div v-if="type">
+            <img src="./image/thumb.png" alt />
+            <p>{{name}}</p>
+          </div>
+          <div v-else>
+            <img src="./image/default_user_icon.png" alt />
+            <button @click="gotologin">登录/注册</button>
+          </div>
         </div>
         <ul class="msg-ul">
           <li>
@@ -49,7 +55,7 @@
             <i class="el-icon-truck"></i>
             <p>地址</p>
           </li>
-          <li>
+          <li @click="gotoAccount">
             <i class="el-icon-user"></i>
             <p>账号</p>
           </li>
@@ -57,7 +63,7 @@
             <i class="el-icon-star-off"></i>
             <p>收藏</p>
           </li>
-          <li>
+          <li @click="gotoServer">
             <i class="el-icon-headset"></i>
             <p>客服</p>
           </li>
@@ -65,7 +71,7 @@
             <i class="el-icon-c-scale-to-original"></i>
             <p>AR</p>
           </li>
-          <li>
+          <li @click="gotoset">
             <i class="el-icon-setting"></i>
             <p>设置</p>
           </li>
@@ -100,6 +106,18 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      type: false,
+      name: ""
+    };
+  },
+  mounted() {
+    if (this.$store.state.common.username) {
+      this.name = this.$store.state.common.username;
+      this.type = true;
+    }
+  },
   methods: {
     gotohome() {
       this.$router.push("/home");
@@ -118,6 +136,27 @@ export default {
     },
     gotologin() {
       this.$router.push("/login");
+    },
+    gotoServer() {
+      this.$router.push("/server");
+    },
+    gotoAccount() {
+      let code = localStorage.getItem("authorCheck");
+      let username = localStorage.getItem("username");
+      if (code && username) {
+        this.$router.push("/account");
+      } else {
+        return;
+      }
+    },
+    gotoset() {
+      let code = localStorage.getItem("authorCheck");
+      let username = localStorage.getItem("username");
+      if (code && username) {
+        this.$router.push("/set");
+      } else {
+        return;
+      }
     }
   }
 };
@@ -173,6 +212,12 @@ html {
   align-items: center;
   margin-top: 25px;
 }
+.touxiang div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .touxiang button {
   width: 100px;
@@ -187,6 +232,12 @@ html {
   width: 68px;
   height: 68px;
   display: block;
+  border-radius: 50%;
+}
+.touxiang p {
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
 }
 .msg-ul {
   display: flex;
