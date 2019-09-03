@@ -17,6 +17,42 @@ Router.post("/reg",async (req,res,next)=>{
     next();
 })
 
+// 用户登录
+let {create,verify} = require("../common/token");
+Router.get("/login",async (req,res,next)=>{
+    let {email,password} = req.query;
+    let result = await find("user",{email,password});
+    let type = result[0];
+    if(type){
+        let name = type.username;
+        let authorCheck = create(email);
+        res.send(formatData({data:{username:name,authorCheck}}));
+    }else{
+        res.send(formatData({code:0}));
+    }
+})
+
+// 验证token
+Router.get("/verify", (req, res, next) => {
+    let authorCheck = req.header("authorCheck");
+    let result = verify(authorCheck);
+    if (result) {
+        res.send(formatData({
+            data: {
+                authorCheck: true
+            }
+        }));
+    } else {
+        res.send(formatData({
+            code: 0,
+            data: {
+                authorCheck: false
+            }
+        }));
+    }
+    next();
+})
+
 
 
 module.exports = Router;

@@ -23,7 +23,7 @@
     <div class="footer">
       <el-row class="row">
         <el-col :span="8" class="client">
-          <button>
+          <button @click="gotoCart">
             <i class="el-icon-shopping-cart-full"></i>
           </button>
           <button>
@@ -31,13 +31,33 @@
           </button>
         </el-col>
         <el-col :span="8" class="cart">
-          <button>加入购物车</button>
+          <button @click="drawer = true">加入购物车</button>
         </el-col>
         <el-col :span="8" class="butIt">
           <button>立即购买</button>
         </el-col>
       </el-row>
     </div>
+    <el-drawer :visible.sync="drawer" direction="btt" :before-close="handleClose" size="57%">
+      <p class="p1">{{data.data.result.size.title}}</p>
+      <el-select v-model="value1" placeholder="请选择">
+        <el-option v-for="item in data.data.result.size.content" :key="item.rank" :value="item.val"></el-option>
+      </el-select>
+      <p class="p1">{{data.data.result.color.title}}</p>
+      <el-select v-model="value2" placeholder="请选择">
+        <el-option
+          v-for="item in data.data.result.color.content"
+          :key="item.rank"
+          :value="item.val"
+        ></el-option>
+      </el-select>
+      <p class="p1">数量</p>
+      <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+      <div class="price" @click="addC">
+        <p>加入购物车</p>
+        <p>￥{{(data.data.result.price*num).toFixed(2)}}</p>
+      </div>
+    </el-drawer>
   </div>
 </template>
 <script>
@@ -46,7 +66,11 @@ export default {
     return {
       cType: false,
       cTargetUrl: "",
-      data: ""
+      data: "",
+      drawer: false,
+      value1: "",
+      value2: "",
+      num: 1
     };
   },
   async beforeMount() {
@@ -63,11 +87,44 @@ export default {
   methods: {
     goBack() {
       this.$router.push(this.cTargetUrl);
+    },
+    gotoCart() {
+      this.$router.push("/cart");
+    },
+    handleClose(done) {
+      done();
+    },
+    handleChange(value) {},
+    addC() {
+      if (this.value1 && this.value2) {
+        console.log(666);
+      }
     }
   }
 };
 </script>
 <style scoped>
+.price {
+  height: 60px;
+  background: rgb(255, 215, 29);
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  margin-top: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.price p {
+  padding: 0;
+  margin: 0;
+}
+.p1 {
+  background: rgb(238, 238, 238);
+  line-height: 34px;
+}
+.el-drawer > h2 {
+  margin: 0;
+}
 .client button {
   border: 0;
   width: 50%;

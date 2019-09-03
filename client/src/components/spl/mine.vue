@@ -3,10 +3,8 @@
     <div class="mine-head">
       <div class="mine-head-bc">
         <div class="touxiang">
-          <a href>
-            <img src="./image/default_user_icon.png" alt />
-            <button>登录/注册</button>
-          </a>
+          <img src="./image/default_user_icon.png" alt />
+          <button @click="gotologin">登录/注册</button>
         </div>
         <ul class="msg-ul">
           <li>
@@ -117,6 +115,9 @@ export default {
     },
     gotocart() {
       this.$router.push("/cart");
+    },
+    gotologin() {
+      this.$router.push("/login");
     }
   }
 };
@@ -164,22 +165,19 @@ html {
   background-color: rgba(161, 164, 166, 0.7);
 }
 .touxiang {
-  height: 100px;
+  height: 130px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.touxiang a {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 25px;
 }
-.touxiang a button {
+
+.touxiang button {
   width: 100px;
-  height: 35px;
+  height: 30px;
+
   text-align: center;
   margin-top: 20px;
   background-color: #fff;
