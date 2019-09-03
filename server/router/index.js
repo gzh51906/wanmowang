@@ -8,7 +8,7 @@ let Router = express.Router();
 // 陈日兴引入
 let cMore = require("./crx/cMore");
 // 黄日隆引入
-
+let hHome = require('./hrl/hHome');
 // 苏沛龙引入
 
 Router.use(express.json(), express.urlencoded({
@@ -33,7 +33,7 @@ Router.all('*', function (req, res, next) {
 // 陈日兴引入
 Router.use("/crx", cMore);
 // 黄日隆引入
-
+Router.use('/hrl',hHome);
 // 苏沛龙引入
 
 module.exports = Router;
