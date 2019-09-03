@@ -35,3 +35,5 @@ Router.get("/account", async (req, res) => {
         }))
     }
 })
+
+module.exports = Router;
