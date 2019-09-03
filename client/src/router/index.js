@@ -28,8 +28,9 @@ import Trip from "../pages/trip.vue";
 
 // 苏沛龙引入的
 import mine from "../components/spl/mine.vue" //引入个人中心模块
-
 import reg from "../components/spl/reg.vue" //引入登录模块
+import server from "../components/spl/server.vue" //引入客服模块
+import presale from "../components/spl/presale.vue" //引入预售模块
 
 // 实例化路由
 let router = new VueRouter({
@@ -109,6 +110,17 @@ let router = new VueRouter({
         name: "reg",
         path: "/reg",
         component: reg
+    }, {
+        name: "server",
+        path: "/server",
+        component: server,
+        meta: {
+            authorCheck: true
+        }
+    }, {
+        name: "presale",
+        path: "/presale",
+        component: presale
     }]
 })
 
