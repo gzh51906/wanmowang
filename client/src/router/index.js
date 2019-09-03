@@ -138,6 +138,8 @@ router.beforeEach(async (to, from, next) => {
             if (type.data.data.authorCheck) {
                 next();
             } else {
+                localStorage.removeItem("authorCheck");
+                localStorage.removeItem("username");
                 next({
                     path: '/login',
                     query: {
