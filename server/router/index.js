@@ -11,6 +11,7 @@ let cReg = require("./crx/cRegister");
 // 黄日隆引入
 let hHome = require('./hrl/hHome');
 // 苏沛龙引入
+let Lfind = require("./spl/Lfind.js")
 
 Router.use(express.json(), express.urlencoded({
     extended: false
@@ -37,5 +38,6 @@ Router.use("/crx", cReg);
 // 黄日隆引入
 Router.use('/hrl',hHome);
 // 苏沛龙引入
+Router.use("/spl", Lfind)
 
 module.exports = Router;

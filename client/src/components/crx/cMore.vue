@@ -26,15 +26,15 @@
           <button @click="gotoCart">
             <i class="el-icon-shopping-cart-full"></i>
           </button>
-          <button>
+          <button @click="gotoServer">
             <i class="el-icon-service"></i>
           </button>
         </el-col>
         <el-col :span="8" class="cart">
-          <button @click="drawer = true">加入购物车</button>
+          <button @click="addOne">加入购物车</button>
         </el-col>
         <el-col :span="8" class="butIt">
-          <button>立即购买</button>
+          <button @click="buyOne">立即购买</button>
         </el-col>
       </el-row>
     </div>
@@ -53,7 +53,7 @@
       </el-select>
       <p class="p1">数量</p>
       <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
-      <div class="price" @click="addC">
+      <div class="price" @click="addC(other)">
         <p>加入购物车</p>
         <p>￥{{(data.data.result.price*num).toFixed(2)}}</p>
       </div>
@@ -70,7 +70,8 @@ export default {
       drawer: false,
       value1: "",
       value2: "",
-      num: 1
+      num: 1,
+      other: false
     };
   },
   async beforeMount() {
@@ -86,19 +87,67 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push(this.cTargetUrl);
+      this.$router.push("/home");
     },
     gotoCart() {
-      this.$router.push("/cart");
+      this.$router.push({
+        path: "/cart",
+        query: { targetUrl: this.$route.fullPath }
+      });
     },
     handleClose(done) {
       done();
     },
     handleChange(value) {},
-    addC() {
+    async addC(other) {
       if (this.value1 && this.value2) {
-        console.log(666);
+        if (this.$store.state.common.authorCheck) {
+          let goods_id = this.data._id;
+          let type1 = this.value1;
+          let type2 = this.value2;
+          let num = this.num;
+          let imgUrl = this.data.data.result.picture;
+          let price = this.data.data.result.price;
+          let desc = this.data.data.result.title;
+          let username = this.$store.state.common.username;
+          let result = await this.$axios.post("http://127.0.0.1:1901/crx/add", {
+            goods_id,
+            type1,
+            type2,
+            num,
+            imgUrl,
+            price,
+            desc,
+            username
+          });
+          alert(result.data);
+          this.drawer = false;
+          if (other) {
+            this.$router.push({
+              path: "/cart",
+              query: { targetUrl: this.$route.fullPath }
+            });
+          }
+        } else {
+          this.$router.push({
+            path: "/login",
+            query: {
+              targetUrl: this.$route.fullPath
+            }
+          });
+        }
       }
+    },
+    buyOne() {
+      this.drawer = true;
+      this.other = true;
+    },
+    addOne() {
+      this.drawer = true;
+      this.other = false;
+    },
+    gotoServer() {
+      this.$router.push("/server");
     }
   }
 };
