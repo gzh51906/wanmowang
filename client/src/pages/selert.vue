@@ -32,7 +32,7 @@
           <ul class="hotGoodsList">
             <li v-for="item in hHotgoods" :key="item._id">
               <div>
-                <img @click="hGoto(item._id,'home')" :src="item.data.result.picture" width="130px" height="130px" />
+                <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="130px" height="130px" />
                 <p class="hcont">{{item.data.result.title}}</p>
                 <p class="hprice">{{'￥' + item.data.result.price}}</p>
               </div>
@@ -46,7 +46,7 @@
           <ul class="newGoodsList">
             <li v-for="item in hNewgoods" :key="item._id">
               <div>
-                <img :src="item.data.result.picture" width="130px" height="130px" />
+                <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="130px" height="130px" />
                 <p class="hcont">{{item.data.result.title}}</p>
                 <p class="hprice">{{'￥' + item.data.result.price}}</p>
               </div>
@@ -62,7 +62,7 @@
         <div class="clothGoodsBox">
           <ul class="clothGoodsList">
             <li v-for="item in hClothgoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -77,7 +77,7 @@
         <div class="DPGoodsBox">
           <ul class="DPGoodsList">
             <li v-for="item in hDPgoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -92,7 +92,7 @@
         <div class="digitalBox">
           <ul class="digitalList">
             <li v-for="item in hDigitalgoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -107,7 +107,7 @@
         <div class="kitchenBox">
           <ul class="kitchenList">
             <li v-for="item in hKitchengoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -122,7 +122,7 @@
         <div class="tripBox">
           <ul class="tripList">
             <li v-for="item in htripgoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -137,7 +137,7 @@
         <div class="stationeryBox">
           <ul class="stationeryList">
             <li v-for="item in hStationerygoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -152,7 +152,7 @@
         <div class="liveBox">
           <ul class="liveList">
             <li v-for="item in hLivegoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -167,7 +167,7 @@
         <div class="brandBox">
           <ul class="brandList">
             <li v-for="item in hbrandgoods" :key="item._id">
-              <img :src="item.data.result.picture" width="100%" />
+              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
               <p class="hcont">{{item.data.result.title}}</p>
               <p class="price">{{'￥' + item.data.result.price}}</p>
             </li>
@@ -258,7 +258,6 @@ export default {
         title: "ZOEAT棉花糖"
       }
     });
-    console.log(brandData.data.data)
     this.hAuthor = data.data.slice(1, 6);
     this.hHotgoods = data.data.slice(1, 10);
     this.hClothgoods = data.data.slice(8, 12);
@@ -274,13 +273,7 @@ export default {
   },
   methods:{
     hGoto(goods_id,path){
-      this.$router.push({path,params:{goods_id,path}})
-      // this.$axios.post("http://127.0.0.1:1901/hrl/home",{
-      //   params:{
-      //     goods_id:goods_id,
-      //     path:path
-      //   }
-      // })
+      this.$router.push({path,query:{goods_id}})
     }
   }
 }
