@@ -41,15 +41,11 @@
     <el-drawer :visible.sync="drawer" direction="btt" :before-close="handleClose" size="57%">
       <p class="p1">{{data.data.result.size.title}}</p>
       <el-select v-model="value1" placeholder="请选择">
-        <el-option v-for="item in data.data.result.size.content" :key="item.rank" :value="item.val"></el-option>
+        <el-option v-for="item in data.data.result.size.content" :key="item.val" :value="item.val"></el-option>
       </el-select>
       <p class="p1">{{data.data.result.color.title}}</p>
       <el-select v-model="value2" placeholder="请选择">
-        <el-option
-          v-for="item in data.data.result.color.content"
-          :key="item.rank"
-          :value="item.val"
-        ></el-option>
+        <el-option v-for="item in data.data.result.color.content" :key="item.rank" :value="item.val"></el-option>
       </el-select>
       <p class="p1">数量</p>
       <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>

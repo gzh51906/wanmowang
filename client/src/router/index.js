@@ -15,6 +15,7 @@ import cMore from "../components/crx/cMore.vue";
 import cCart from "../components/crx/cCart.vue";
 import cEdit from "../components/crx/cEdit.vue";
 import cLogin from "../components/crx/cLogin.vue";
+import cOrder from "../components/crx/cOrder.vue";
 
 // 黄日隆引入的
 import Home from "../pages/home.vue";
@@ -144,6 +145,13 @@ let router = new VueRouter({
         name: "designer",
         path: "/designer",
         component: designer
+    }, {
+        name: "order",
+        path: "/order",
+        component: cOrder,
+        meta: {
+            authorCheck: true
+        }
     }]
 })
 
