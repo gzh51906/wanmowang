@@ -67,7 +67,12 @@ export default {
       });
     },
     remove() {
-      console.log(this.$route.query.targetUrl);
+      this.$router.push({
+        path:"/edit",
+        query:{
+          targetUrl:this.$route.query.targetUrl
+        }
+      })
     }
   }
 };

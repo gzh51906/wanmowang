@@ -36,6 +36,7 @@ Router.post("/add",async (req,res,next)=>{
     next();
 })
 
+// 获取用户购物车数据
 Router.get("/read",async (req,res,next)=>{
     let {username} = req.query;
     try {
@@ -44,6 +45,14 @@ Router.get("/read",async (req,res,next)=>{
     } catch (error) {
         res.send(formatData({code:0}));
     }
+    next();
+})
+
+// 用户删除购物车数据
+Router.delete("/remove",async (req,res,next)=>{
+    let {selected} = req.query;
+    await remove("cart",{_id:selected});
+    res.send(formatData());
     next();
 })
 
