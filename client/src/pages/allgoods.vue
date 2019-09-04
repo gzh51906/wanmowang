@@ -11,8 +11,8 @@
           <li>人气</li>
           <li>
             <span>价格</span>
-            <i class="el-icon-arrow-up icon1"></i>
-            <i class="el-icon-arrow-down icon2"></i>
+            <i class="el-icon-arrow-up icon1" @click="upPrice(true)"></i>
+            <i class="el-icon-arrow-down icon2" @click="downPrice(false)"></i>
           </li>
         </ul>
       </div>
@@ -64,6 +64,30 @@ export default {
     },
     goback(path) {
       this.$router.push(path);
+    },
+    async upPrice(num){
+        let type = this.$route.query.type;
+        console.log(num);
+        let {data} = await this.$axios.get("http://127.0.0.1:1901/hrl/allgoods",{
+            params:{
+                title:type,
+                asc:num
+            }
+        });
+        this.allgoods = data.data;
+        this.comgoods = this.allgoods.slice(1, 7);
+    },
+    async downPrice(num){
+        let type = this.$route.query.type;
+        console.log(num);
+        let {data} = await this.$axios.get("http://127.0.0.1:1901/hrl/allgoods",{
+            params:{
+                title:type,
+                asc:num
+            }
+        });
+        this.allgoods = data.data;
+        this.comgoods = this.allgoods.slice(1, 7);
     }
   },
   async created() {
@@ -74,7 +98,7 @@ export default {
       }
     });
     this.allgoods = data.data;
-    this.comgoods = this.allgoods.slice(1, 9);
+    this.comgoods = this.allgoods.slice(1, 7);
   },
   computed: {
     noMore() {
@@ -126,7 +150,7 @@ export default {
 }
 #hrl .hearder .hearderBottom .hList .icon1 {
   position: absolute;
-  top: 8px;
+  top: 4px;
 }
 #hrl .hearder .hearderBottom .hList .icon2 {
   position: absolute;
@@ -142,8 +166,8 @@ export default {
   padding: 0;
   margin: 0;
 }
-#hrl .body .list li{
-    width: 100%;
+#hrl .body .list li {
+  width: 100%;
 }
 #hrl .body .list .goodsbox {
   width: 100%;

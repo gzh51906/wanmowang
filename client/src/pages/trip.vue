@@ -6,7 +6,7 @@
     <div class="tripBody">
       <div class="tripbox">
         <div class="tripboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','滑板')">
 			滑板 / Skateboard
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -25,7 +25,7 @@
       <div class="tripbox">
           <div class="boderTop"></div>
         <div class="tripboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','沙滩巾')">
 			沙滩巾 / Beach Towel
             <i class="el-icon-arrow-right"></i>
           </h2>
