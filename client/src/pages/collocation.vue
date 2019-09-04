@@ -6,7 +6,7 @@
     <div class="collocationBody">
       <div class="collocationbox">
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','鼠标垫')">
             鼠标垫/Mousepad
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -25,7 +25,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','帆布包')">
             帆布包/ToTe Bag
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -43,7 +43,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','徽章')">
             微章/Badge
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -61,7 +61,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','货车帽')">
             货车帽/Trucker Hat
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -79,7 +79,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','眼罩')">
             眼罩/Eye Mask
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -97,7 +97,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','口罩')">
             口罩/Mouth Mask
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -115,7 +115,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','棒球帽')">
             棒球帽/Cap
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -133,7 +133,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','圆化妆镜')">
             圆化妆镜/circle mirror
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -151,7 +151,7 @@
       <div class="collocationbox">
           <div class="boderTop"></div>
         <div class="collocationboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','方化妆镜')">
             方化妆镜/rectangle mirror
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -244,6 +244,9 @@ export default {
   methods:{
     Hgoto(goods_id,path){
       this.$router.push({path,query:{goods_id}})
+    },
+    gotoAll(path,type){
+       this.$router.push({path,query:{type}})
     }
   }
 };

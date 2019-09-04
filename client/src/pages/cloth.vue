@@ -6,7 +6,7 @@
     <div class="clothBody">
       <div class="clothbox">
         <div class="clothboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','联名潮牌')">
             T恤/Tee
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -25,7 +25,7 @@
       <div class="clothbox">
           <div class="boderTop"></div>
         <div class="clothboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','联名潮牌')">
             卫衣
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -43,7 +43,7 @@
       <div class="clothbox">
           <div class="boderTop"></div>
         <div class="clothboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','联名潮牌')">
             联名潮牌/vest
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -86,6 +86,9 @@ export default {
   methods:{
     Hgoto(goods_id,path){
       this.$router.push({path,query:{goods_id}})
+    },
+    gotoAll(path,type){
+       this.$router.push({path,query:{type}})
     }
   }
 };

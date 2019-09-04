@@ -6,7 +6,7 @@
     <div class="stationeryBody">
       <div class="stationerybox">
         <div class="stationeryboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','精装本')">
 			精装本 / Hardcover Notebook
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -25,7 +25,7 @@
       <div class="stationerybox">
           <div class="boderTop"></div>
         <div class="stationeryboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','裸背本')">
 			裸背本 / Backless Notebook
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -69,6 +69,9 @@ export default {
   methods:{
     Hgoto(goods_id,path){
       this.$router.push({path,query:{goods_id}})
+    },
+     gotoAll(path,type){
+       this.$router.push({path,query:{type}})
     }
   }
 };

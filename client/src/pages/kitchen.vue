@@ -6,7 +6,7 @@
     <div class="kitchenBody">
       <div class="kitchenbox">
         <div class="kitchenboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','马克杯')">
             马克杯/Mug
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -31,7 +31,7 @@
       <div class="kitchenbox">
         <div class="boderTop"></div>
         <div class="kitchenboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','插勺杯')">
             插勺杯 / Spoon Cup
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -80,6 +80,9 @@ export default {
   methods: {
     Hgoto(goods_id, path) {
       this.$router.push({ path, query: { goods_id } });
+    },
+    gotoAll(path, type) {
+      this.$router.push({ path, query: { type } });
     }
   }
 };
