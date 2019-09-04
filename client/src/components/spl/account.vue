@@ -17,7 +17,7 @@
         <ul>
           <li>
             <span>昵称:</span>
-            <span>{{name}}</span>
+            <span>{{$store.state.common.username}}</span>
           </li>
           <li>
             <span>性别:</span>
@@ -35,7 +35,7 @@
           </li>
           <li>
             <span>我的邮箱:</span>
-            <span></span>
+            <span v-if="email">{{data.data.email}}</span>
           </li>
         </ul>
       </div>
@@ -46,7 +46,8 @@
 export default {
   data() {
     return {
-      name: ""
+      data: "",
+      email: false
     };
   },
   methods: {
@@ -54,10 +55,16 @@ export default {
       this.$router.push("/mine");
     }
   },
-  mounted() {
-    this.name = localStorage.getItem("username");
-  },
-  beforeCreate() {}
+  mounted() {},
+  async created() {
+    let { data } = await this.$axios({
+      methods: "get",
+      url: "http://127.0.0.1:1901/spl/account",
+      params: { username: this.$store.state.common.username }
+    });
+    this.data = data;
+    this.email = true;
+  }
 };
 </script>
 <style scoped>
