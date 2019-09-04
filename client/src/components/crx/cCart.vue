@@ -25,7 +25,7 @@
     </div>
     <div class="footer">
       <div class="priceAll">合计：RMB {{allPrice()}}</div>
-      <button class="buy">结算</button>
+      <button class="buy" @click="buying">结算</button>
     </div>
   </div>
 </template>
@@ -48,6 +48,34 @@ export default {
     this.show = true;
   },
   methods: {
+    async buying() {
+      let order = this.data.map(item => {
+        return {
+          goods_id: item.goods_id,
+          type1: item.type1,
+          type2: item.type2,
+          num: item.num,
+          imgUrl: item.imgUrl,
+          price: item.price,
+          desc: item.desc,
+          username: item.username,
+          complete: false
+        };
+      });
+      let result1 = await this.$axios.post(
+        "http://127.0.0.1:1901/crx/insertOrder",
+        { data: order }
+      );
+      let result2 = await this.$axios.delete(
+        "http://127.0.0.1:1901/crx/removeOrder",
+        {
+          params: {
+            username: this.$store.state.common.username
+          }
+        }
+      );
+      this.$router.push("/order");
+    },
     back() {
       this.$router.push(this.$route.query.targetUrl);
     },
@@ -68,11 +96,11 @@ export default {
     },
     remove() {
       this.$router.push({
-        path:"/edit",
-        query:{
-          targetUrl:this.$route.query.targetUrl
+        path: "/edit",
+        query: {
+          targetUrl: this.$route.query.targetUrl
         }
-      })
+      });
     }
   }
 };

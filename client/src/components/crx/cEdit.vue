@@ -75,6 +75,9 @@ export default {
             }
           );
         }
+        this.data = this.data.filter(item => {
+          return !this.selected.includes(item._id);
+        });
         this.selected = [];
       }
     }

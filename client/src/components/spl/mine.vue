@@ -36,7 +36,7 @@
     </div>
     <div class="main">
       <div class="buy">
-        <div style="border-right:1px solid #ccc">
+        <div style="border-right:1px solid #ccc" @click="gotorder">
           <p>
             <i class="el-icon-document"></i>
           </p>
@@ -88,7 +88,7 @@
           <i class="el-icon-alarm-clock"></i>
           <p>预售</p>
         </li>
-        <li>
+        <li @click="gotodes">
           <i class="el-icon-data-analysis"></i>
           <p>设计师</p>
         </li>
@@ -131,8 +131,17 @@ export default {
     gotopresale() {
       this.$router.push("/presale");
     },
+    gotorder() {
+      this.$router.push({
+        path: "/order",
+        query: { targetUrl: this.$route.fullPath }
+      });
+    },
     gotocart() {
-      this.$router.push("/cart");
+      this.$router.push({
+        path: "/cart",
+        query: { targetUrl: this.$route.fullPath }
+      });
     },
     gotologin() {
       this.$router.push("/login");
@@ -157,6 +166,9 @@ export default {
       } else {
         return;
       }
+    },
+    gotodes() {
+      this.$router.push("/designer");
     }
   }
 };

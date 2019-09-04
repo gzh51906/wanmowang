@@ -8,10 +8,12 @@ let Router = express.Router();
 // 陈日兴引入
 let cMore = require("./crx/cMore");
 let cReg = require("./crx/cRegister");
+let cOrder = require("./crx/cOrder");
 // 黄日隆引入
 let hHome = require('./hrl/hHome');
 // 苏沛龙引入
 let Lfind = require("./spl/Lfind.js")
+let Ldes = require("./spl/Ldes.js")
 
 Router.use(express.json(), express.urlencoded({
     extended: false
@@ -35,9 +37,11 @@ Router.all('*', function (req, res, next) {
 // 陈日兴引入
 Router.use("/crx", cMore);
 Router.use("/crx", cReg);
+Router.use("/crx", cOrder);
 // 黄日隆引入
-Router.use('/hrl',hHome);
+Router.use('/hrl', hHome);
 // 苏沛龙引入
 Router.use("/spl", Lfind)
+Router.use("/spl", Ldes)
 
 module.exports = Router;
