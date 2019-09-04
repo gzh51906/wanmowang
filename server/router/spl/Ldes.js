@@ -13,7 +13,7 @@ Router.get("/designer", async (req, res) => {
 
     let result = await find("goods", {})
     if (result) {
-        let data = result.slice(10, 20)
+        let data = result.slice(512, 518)
         res.send(formatData({
             data
         }))
