@@ -34,6 +34,7 @@ import server from "../components/spl/server.vue" //引入客服模块
 import presale from "../components/spl/presale.vue" //引入预售模块
 import set from "../components/spl/set.vue" //引入设置退出模块
 import account from "../components/spl/account.vue" //引入账户模块
+import designer from "../components/spl/designer.vue" //引入设计师模块
 
 // 实例化路由
 let router = new VueRouter({
@@ -139,6 +140,10 @@ let router = new VueRouter({
         name: "account",
         path: "/account",
         component: account
+    }, {
+        name: "designer",
+        path: "/designer",
+        component: designer
     }]
 })
 

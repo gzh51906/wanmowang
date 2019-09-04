@@ -30,7 +30,7 @@
           <i class="el-icon-alarm-clock"></i>
           <p>预售</p>
         </li>
-        <li>
+        <li @click="gotodes">
           <i class="el-icon-data-analysis"></i>
           <p>设计师</p>
         </li>
@@ -60,6 +60,9 @@ export default {
     },
     gotopresale() {
       this.$router.push("/presale");
+    },
+    gotodes() {
+      this.$router.push("/designer");
     }
   }
 };
