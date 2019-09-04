@@ -115,7 +115,7 @@ export default {
         },{
           icon:"el-icon-data-analysis",
           text:"设计师",
-          path:''
+          path:'/designer'
         },{
           icon:"el-icon-chat-line-round",
           text:"客服",
