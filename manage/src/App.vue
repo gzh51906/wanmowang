@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <home v-if="usercheck"></home>
+    <home v-if="$store.state.common.userCheck"></home>
     <login v-else></login>
   </div>
 </template>
 
 <script>
 import home from "./pages/home.vue";
+import login from "./pages/login.vue";
 export default {
   name: "app",
-  data() {
-    usercheck: false;
-  },
   components: {
-    home
+    home,
+    login
   },
   created() {
     let usercheck = localStorage.getItem("usercheck");
@@ -25,6 +24,8 @@ export default {
 </script>
 
 <style>
-#app {
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>

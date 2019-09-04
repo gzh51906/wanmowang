@@ -79,6 +79,7 @@ export default {
           alert("submit!");
         } else {
           console.log("error submit!!");
+          this.$store.commit("userChange");
           return false;
         }
       });
