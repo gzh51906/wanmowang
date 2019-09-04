@@ -76,7 +76,7 @@ export default {
   },
   async beforeMount() {
     this.cTargetUrl = this.$route.query.targetUrl || "/home";
-    let goods_id = this.$route.query.goods_id || "5d6b48acbb54e228905705c3";
+    let goods_id = this.$route.query.goods_id || "5d6b4911d41ac71e7007316d";
     let data = await this.$axios.get("http://127.0.0.1:1901/crx/goods", {
       params: {
         goods_id
