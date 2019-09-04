@@ -7,7 +7,7 @@
         <br />
         <span>STORE</span>
       </div>
-      <i class="el-icon-shopping-cart-2 icon header-right"></i>
+      <i class="el-icon-shopping-cart-2 icon header-right" @click="gotocart('cart')"></i>
     </el-header>
     <div>
       <ul class="hnav">
@@ -146,6 +146,9 @@ export default {
     },
     Hfgoto(path){
        this.$router.push(path);
+    },
+    gotocart(path){
+      this.$router.push(path);
     }
   }
 };
@@ -155,7 +158,9 @@ export default {
 * {
   list-style: none;
 }
-
+.icon {
+  font-size: 30px;
+}
 .el-header {
   width: 100%;
   background-color: rgba(255, 215, 29);
@@ -225,9 +230,6 @@ export default {
   position: fixed;
   bottom: 0;
 }
-.icon {
-  font-size: 20px;
-}
 .iconText{
   font-size: 10px;
   margin: 0;
@@ -235,6 +237,7 @@ export default {
 .footer .Hfooter {
   padding-left: 0;
   width: 100%;
+  margin-top: 2px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

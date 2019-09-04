@@ -6,7 +6,7 @@
     <div class="digitalBody">
       <div class="digitalbox">
         <div class="digitalboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','手机壳')">
             手机壳/Phone case
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -25,7 +25,7 @@
       <div class="digitalbox">
           <div class="boderTop"></div>
         <div class="digitalboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','mac贴纸')">
             mac贴纸/Mac Cover Sticker
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -69,6 +69,9 @@ export default {
   methods:{
     Hgoto(goods_id,path){
       this.$router.push({path,query:{goods_id}})
+    },
+    gotoAll(path,type){
+       this.$router.push({path,query:{type}})
     }
   }
 };
