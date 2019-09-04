@@ -132,7 +132,7 @@ export default {
       this.$router.push("/presale");
     },
     gotocart() {
-      this.$router.push("/cart");
+      this.$router.push({path:"/cart",query:{targetUrl:this.$route.fullPath}});
     },
     gotologin() {
       this.$router.push("/login");
