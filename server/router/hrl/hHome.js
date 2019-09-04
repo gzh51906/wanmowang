@@ -25,11 +25,11 @@ Router.get('/home', async (req, res, next) => {
     next();
 })
 //接收客户端的数据
-Router.post('/home',async(req,res,next)=>{
-    let{goods_id,path} = req.body;
-    let data = await find("goods",{
-        '_id':goods_id
-    })
-})
+// Router.post('/home',async(req,res,next)=>{
+//     let{goods_id,path} = req.body;
+//     let data = await find("goods",{
+//         '_id':goods_id
+//     })
+// })
 
 module.exports = Router;
