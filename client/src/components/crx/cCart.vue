@@ -1,39 +1,81 @@
 <template>
-  <div class="box">
+  <div class="box" v-if="show">
     <div class="header">
-      <button class="back">
+      <button class="back" @click="back">
         <i class="el-icon-back"></i>
       </button>
       <span>购物车</span>
-      <button class="delete">
+      <button class="delete" @click="remove">
         <i class="el-icon-s-order"></i>
       </button>
     </div>
     <div class="main">
       <ul>
-        <li>
-          <img
-            src="http://cdn.inklego.com/picture/template/iphone6/36900d4264c81583f540ef5ffb687747.jpg?x-oss-process=image/resize,m_fill,h_300,w_300"
-            alt
-          />
-          <p class="desc">每个明天，都是明天</p>
-          <div class="price">RMB 39.00</div>
+        <li v-for="item in data" :key="item._id" @click="gotoMore(item.goods_id)">
+          <img :src="item.imgUrl" alt />
+          <p class="desc">{{item.desc}}</p>
+          <div class="price">RMB {{item.price.toFixed(2)}}</div>
           <div class="type">
-            <button>啦啦啦</button>
-            <button>哈哈哈哈哈哈哈哈</button>
-            <span>×1</span>
+            <button>{{item.type1}}</button>
+            <button>{{item.type2}}</button>
+            <span>×{{item.num}}</span>
           </div>
         </li>
       </ul>
     </div>
     <div class="footer">
-      <div class="priceAll">合计：RMB 69.00</div>
+      <div class="priceAll">合计：RMB {{allPrice()}}</div>
       <button class="buy">结算</button>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      show: false,
+      data: ""
+    };
+  },
+  async beforeMount() {
+    let username = this.$store.state.common.username;
+    let data = await this.$axios.get("http://127.0.0.1:1901/crx/read", {
+      params: {
+        username
+      }
+    });
+    this.data = data.data.data;
+    this.show = true;
+  },
+  methods: {
+    back() {
+      this.$router.push(this.$route.query.targetUrl);
+    },
+    allPrice() {
+      return this.data
+        .reduce((prev, item) => {
+          return prev + item.num * item.price;
+        }, 0)
+        .toFixed(2);
+    },
+    gotoMore(goods_id) {
+      this.$router.push({
+        path: "/more",
+        query: {
+          goods_id
+        }
+      });
+    },
+    remove() {
+      this.$router.push({
+        path:"/edit",
+        query:{
+          targetUrl:this.$route.query.targetUrl
+        }
+      })
+    }
+  }
+};
 </script>
 <style scoped>
 .main {

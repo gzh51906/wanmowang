@@ -15,7 +15,7 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in clothGoods" :key="item._id">
-              <img :src="item.data.result.picture" width="105px" height="105px" />
+              <img @click="Hgoto(item._id,'more')" class="" :src="item.data.result.picture" width="105px" height="105px" />
             </li>
           </ul>
         </div>
@@ -33,7 +33,7 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in weiyigoods" :key="item._id">
-              <img :src="item.data.result.picture" width="105px" height="105px" />
+              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
             </li>
           </ul>
         </div>
@@ -51,7 +51,7 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in lmcpgoods" :key="item._id">
-              <img :src="item.data.result.picture" width="105px" height="105px" />
+              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
             </li>
           </ul>
         </div>
@@ -77,13 +77,16 @@ export default {
         title: "联名潮牌"
       }
     });
-    console.log(clothData.data);
     this.bigImg = clothData.data.data[0].bigImg;
     this.clothGoods = clothData.data.data.slice(5, 8);
     this.weiyigoods = clothData.data.data.slice(21);
     this.lmcpgoods = clothData.data.data.slice(19,22);
     this.type = clothData.data.data[0].type.slice(1);
-    console.log(this.lmcpgoods);
+  },
+  methods:{
+    Hgoto(goods_id,path){
+      this.$router.push({path,query:{goods_id}})
+    }
   }
 };
 </script>

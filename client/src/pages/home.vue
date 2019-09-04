@@ -22,8 +22,9 @@
     </el-main>
     <div class="footer">
       <ul class="Hfooter">
-        <li v-for="item in hiconlist" :key="item">
-          <i :class="item" class="icon"></i>
+        <li v-for="item in hiconlist" :key="item.text" @click="Hfgoto(item.path)">
+          <i :class="item.icon" class="icon"></i>
+          <p class="iconText">{{item.text}}</p>
         </li>
       </ul>
     </div>
@@ -103,11 +104,27 @@ export default {
       ],
       //图标集合
       hiconlist: [
-        "el-icon-s-goods",
-        "el-icon-message-solid",
-        "el-icon-s-custom",
-        "el-icon-chat-line-round",
-        "el-icon-user"
+        {
+          icon:"el-icon-s-home",
+          text:"首页",
+          path:'/home'
+        },{
+          icon:"el-icon-alarm-clock",
+          text:"预售",
+          path:"/presale"
+        },{
+          icon:"el-icon-data-analysis",
+          text:"设计师",
+          path:''
+        },{
+          icon:"el-icon-chat-line-round",
+          text:"客服",
+          path:"/server"
+        },{
+          icon:"el-icon-user",
+          text:"我的",
+          path:"/mine"
+        }
       ],
       currter: "selert"
     };
@@ -126,6 +143,9 @@ export default {
   methods: {
     goto(name) {
       this.currter = name
+    },
+    Hfgoto(path){
+       this.$router.push(path);
     }
   }
 };
@@ -206,7 +226,11 @@ export default {
   bottom: 0;
 }
 .icon {
-  font-size: 30px;
+  font-size: 20px;
+}
+.iconText{
+  font-size: 10px;
+  margin: 0;
 }
 .footer .Hfooter {
   padding-left: 0;

@@ -88,7 +88,7 @@
           <i class="el-icon-alarm-clock"></i>
           <p>预售</p>
         </li>
-        <li>
+        <li @click="gotodes">
           <i class="el-icon-data-analysis"></i>
           <p>设计师</p>
         </li>
@@ -132,7 +132,10 @@ export default {
       this.$router.push("/presale");
     },
     gotocart() {
-      this.$router.push({path:"/cart",query:{targetUrl:this.$route.fullPath}});
+      this.$router.push({
+        path: "/cart",
+        query: { targetUrl: this.$route.fullPath }
+      });
     },
     gotologin() {
       this.$router.push("/login");
@@ -157,6 +160,9 @@ export default {
       } else {
         return;
       }
+    },
+    gotodes() {
+      this.$router.push("/designer");
     }
   }
 };
