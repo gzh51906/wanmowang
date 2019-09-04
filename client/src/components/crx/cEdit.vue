@@ -1,25 +1,22 @@
 <template>
-  <div>
+  <div v-if="type">
     <div class="header">
-      <button class="back">
+      <button class="back" @click="back">
         <i class="el-icon-back"></i>
       </button>
       <span>编辑商品</span>
-      <button class="delete">
+      <button class="delete" @click="remove">
         <i class="el-icon-delete"></i>
       </button>
     </div>
     <div class="main">
       <ul>
-        <li>
-          <img
-            src="http://cdn.inklego.com/picture/template/iphone6/36900d4264c81583f540ef5ffb687747.jpg?x-oss-process=image/resize,m_fill,h_200,w_200"
-            alt
-          />
-          <p>啦啦啦啦啦啦啦啦啦啦啦啦</p>
-          <div>RMB 39.00</div>
+        <li v-for="item in data" :key="item._id">
+          <img :src="item.imgUrl" alt />
+          <p>{{item.desc}}</p>
+          <div>RMB {{(item.price*item.num).toFixed(2)}}</div>
           <span>
-            <i class="el-icon-success" :class="type ? 'active' : ''" @click="change"></i>
+            <i class="el-icon-success" @click="select($event,item._id)"></i>
           </span>
         </li>
       </ul>
@@ -30,12 +27,56 @@
 export default {
   data() {
     return {
-      type: false
+      type: false,
+      data: "",
+      selected: []
     };
   },
+  async beforeMount() {
+    let username = this.$store.state.common.username;
+    let data = await this.$axios.get("http://127.0.0.1:1901/crx/read", {
+      params: {
+        username
+      }
+    });
+    this.data = data.data.data;
+    this.type = true;
+  },
   methods: {
-    change() {
-      this.type = !this.type;
+    back() {
+      this.$router.push({
+        path: "/cart",
+        query: {
+          targetUrl: this.$route.query.targetUrl
+        }
+      });
+    },
+    select(e, id) {
+      e.target.classList.toggle("active");
+      let has = e.target.className.includes("active");
+      if (has) {
+        if (this.selected.includes(id)) {
+          return;
+        } else {
+          this.selected.push(id);
+        }
+      } else {
+        let idx = this.selected.indexOf(id);
+        this.selected.splice(idx, 1);
+      }
+    },
+    async remove() {
+      if (this.selected.length !== 0) {
+        for (let i = 0; i < this.selected.length; i++) {
+          let result = await this.$axios.delete(
+            "http://127.0.0.1:1901/crx/remove",
+            {
+              params: { selected: this.selected[i] }
+            }
+          );
+        }
+        this.selected = [];
+      }
     }
   }
 };
