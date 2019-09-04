@@ -43,7 +43,7 @@
       <div class="tripbox">
           <div class="boderTop"></div>
         <div class="tripboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','雨伞')">
 			雨伞 / Umbrella
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -61,7 +61,7 @@
       <div class="tripbox">
           <div class="boderTop"></div>
         <div class="tripboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','旅行箱')">
 			旅行箱 / Suitcase
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -119,6 +119,9 @@ export default {
   methods:{
     Hgoto(goods_id,path){
       this.$router.push({path,query:{goods_id}})
+    },
+    gotoAll(path,type){
+       this.$router.push({path,query:{type}})
     }
   }
 };

@@ -2,8 +2,8 @@
     <div>
          <div class="block" width="100%">
         <el-carousel height="170px">
-          <el-carousel-item v-for="item in bannerimg" :key="item.url">
-            <img :src="item.url" width="100%"/>
+          <el-carousel-item v-for="item in bannerimg" :key="item">
+            <img :src="item" width="100%"/>
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -182,21 +182,11 @@ export default {
     data(){
         return{
         bannerimg: [
-        {
-          url: require("./img/p1.png")
-        },
-        {
-          url: require("./img/p2.png")
-        },
-        {
-          url: require("./img/p3.png")
-        },
-        {
-          url: require("./img/p4.png")
-        },
-        {
-          url: require("./img/p5.png")
-        }
+        "http://cdn.inklego.com/picture/banner/20190114/b5f154a7be5efb76e2154c81a952a2a6.png?x-oss-process=image/resize,w_500",
+        "http://cdn.inklego.com/picture/banner/20180403/dca575d46f495eea73c65819123aff9a.png?x-oss-process=image/resize,w_500",
+        "http://cdn.inklego.com/picture/banner/20190228/cc65b511cf72f9154d6c3fab03c30186.jpg?x-oss-process=image/resize,w_500",
+        "http://cdn.inklego.com/picture/banner/20181010/342719b89256204014b440dffa4c8974.jpg?x-oss-process=image/resize,w_500",
+        "http://cdn.inklego.com/picture/banner/20190219/bb8c5575de53128c48093725d24da1b1.jpg?x-oss-process=image/resize,w_500"
       ],
       hAuthor: [],
       hHotgoods: [],
@@ -281,6 +271,9 @@ export default {
 
 <style scoped>
 *{list-style: none;}
+.icon{
+  font-size: 40px;
+}
 .el-main .hauthor {
   height: 270px;
 }

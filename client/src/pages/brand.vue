@@ -6,7 +6,7 @@
     <div class="brandBody">
       <div class="brandbox">
         <div class="brandboxNav">
-          <h2>
+          <h2 @click="gotoAll('allgoods','ZOEAT棉花糖')">
 			ZOEAT棉花糖 / Marshmallow
             <i class="el-icon-arrow-right"></i>
           </h2>
@@ -49,6 +49,9 @@ export default {
   methods: {
     Hgoto(goods_id, path) {
       this.$router.push({ path, query: { goods_id } });
+    },
+    gotoAll(path,type){
+       this.$router.push({path,query:{type}})
     }
   }
 };

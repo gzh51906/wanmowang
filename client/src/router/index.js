@@ -27,6 +27,7 @@ import Kitchen from "../pages/kitchen.vue";
 import Live from "../pages/live.vue";
 import Stationery from "../pages/stationery.vue";
 import Trip from "../pages/trip.vue";
+import Allgoods from "../pages/allgoods.vue";
 
 // 苏沛龙引入的
 import mine from "../components/spl/mine.vue" //引入个人中心模块
@@ -95,6 +96,10 @@ let router = new VueRouter({
         name: 'trip',
         path: '/trip',
         component: Trip
+    },{
+        name:"allgoods",
+        path:'/allgoods',
+        component:Allgoods
     }, {
         name: mine,
         path: "/mine",
