@@ -19,6 +19,7 @@ Vue.use(VueRouter);
 
 // 苏沛龙引入的
 
+
 // 实例化路由
 let router = new VueRouter({
     //例子
@@ -35,9 +36,7 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
-    routes: [
-
-    ]
+    routes: []
 })
 
 export default router;
