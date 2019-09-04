@@ -36,7 +36,7 @@
     </div>
     <div class="main">
       <div class="buy">
-        <div style="border-right:1px solid #ccc">
+        <div style="border-right:1px solid #ccc" @click="gotorder">
           <p>
             <i class="el-icon-document"></i>
           </p>
@@ -130,6 +130,12 @@ export default {
     },
     gotopresale() {
       this.$router.push("/presale");
+    },
+    gotorder() {
+      this.$router.push({
+        path: "/order",
+        query: { targetUrl: this.$route.fullPath }
+      });
     },
     gotocart() {
       this.$router.push({

@@ -21,6 +21,20 @@
         </span>
         <span>SELECTED STORE</span>
       </div>
+      <div class="author" v-for="(item,idx) in authormsg" :key="idx">
+        <div class="msg">
+          <img :src="item.thumb" alt />
+          <span>{{item.nick}}</span>
+          <span>{{datalist[idx].type}}</span>
+          <div class="like">
+            <i class="el-icon-plus"></i>
+            <span>1409人关注</span>
+          </div>
+        </div>
+        <div class="works">
+          <img :src="item[idx]" v-for="(item,idx) in production" :key="idx" alt />
+        </div>
+      </div>
     </div>
     <div class="footer">
       <ul>
@@ -68,7 +82,9 @@ export default {
           eng: "CALLIGRAPHY DESIGN"
         },
         { type: "明星应援", eng: "STAR WHO" }
-      ]
+      ],
+      authormsg: [],
+      production: []
     };
   },
   methods: {
@@ -93,7 +109,14 @@ export default {
       methods: "get",
       url: "http://127.0.0.1:1901/spl/designer"
     });
-    console.log(data);
+
+    for (let i = 0; i < data.data.length; i++) {
+      this.authormsg.push(data.data[i].data.result.designer);
+    }
+    for (let i = 0; i < data.data.length; i++) {
+      this.production.push(data.data[i].data.result.details);
+    }
+    this.production = this.production.slice(0, 4);
   }
 };
 </script>
@@ -119,6 +142,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0px;
 }
 .head span:nth-child(2) {
   font-size: 14px;
@@ -127,7 +152,7 @@ body {
   width: 100%;
   height: 80px;
   display: flex;
-  margin-top: 15px;
+  margin-top: 70px;
 }
 .type ul {
   width: 100%;
@@ -156,7 +181,7 @@ body {
   background-color: rgb(255, 212, 73);
 }
 .type ul li:nth-child(3) {
-  background-color: rgb(25, 116, 117);
+  background-color: rgb(255, 116, 117);
 }
 .type ul li:nth-child(4) {
   background-color: rgb(90, 182, 255);
@@ -181,6 +206,7 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
+  overflow: auto;
 }
 .main .title {
   width: 100%;
@@ -188,7 +214,8 @@ body {
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 25px;
+  margin-bottom: 15px;
   padding-left: 20px;
   box-sizing: border-box;
   color: rgb(153, 148, 148);
@@ -197,10 +224,64 @@ body {
   font-size: 16px;
   color: #000;
 }
+.author {
+  width: 100%;
+  height: 210px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.author .msg {
+  display: flex;
+  width: 100%;
+  height: 90px;
+  justify-content: space-around;
+  align-items: center;
+}
+.author .msg span:nth-child(2) {
+  font-size: 12px;
+}
+.author .msg span:nth-child(3) {
+  display: flex;
+  width: 65px;
+  height: 20px;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+.author .msg img {
+  width: 55px;
+  height: 55px;
+}
+.author .msg .like {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.author .msg i {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 212, 73);
+}
+.author .works {
+  width: 100%;
+  height: 105px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.author .works img {
+  width: 70px;
+  height: 70px;
+}
 .footer {
   width: 100%;
   height: 50px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   background-color: #fff;
 }
