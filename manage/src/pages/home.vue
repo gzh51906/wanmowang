@@ -8,7 +8,7 @@
           <div @click="change('/商品管理/商品分类')">商品分类</div>
         </el-collapse-item>
         <el-collapse-item title="用户管理" name="2">
-          <div @click="change('/用户管理/用户列表')">用户列表</div>
+          <div @click="change('/用户管理/用户列表','/userList')">用户列表</div>
           <div @click="change('/用户管理/添加用户')">添加用户</div>
           <div @click="change('/用户管理/管理人员')">管理人员</div>
         </el-collapse-item>
@@ -35,8 +35,9 @@ export default {
     };
   },
   methods: {
-    change(title) {
+    change(title, path) {
       this.$store.commit("updateTitle", "首页" + title);
+      this.$router.push(path);
     },
     ...mapMutations({
       tuichu: "removeUser"

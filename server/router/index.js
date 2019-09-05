@@ -9,6 +9,7 @@ let Router = express.Router();
 let cMore = require("./crx/cMore");
 let cReg = require("./crx/cRegister");
 let cOrder = require("./crx/cOrder");
+let manage_user = require("./crx/manage_user");
 // 黄日隆引入
 let hHome = require('./hrl/hHome');
 let hAllgoods = require('./hrl/hlistpage');
@@ -41,10 +42,13 @@ Router.all('*', function (req, res, next) {
 Router.use("/crx", cMore);
 Router.use("/crx", cReg);
 Router.use("/crx", cOrder);
+Router.use("/crx", manage_user);
 // 黄日隆引入
 Router.use('/hrl', hHome);
 Router.use('/hrl',hAllgoods);
 Router.use('/hrl',hOrder);
+Router.use('/hrl', hAllgoods);
+
 // 苏沛龙引入
 Router.use("/spl", Lfind);
 Router.use("/spl", Ldes);

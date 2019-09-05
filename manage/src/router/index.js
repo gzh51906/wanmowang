@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 // 引入单页面组件
 // import Home from "../pages/Home.vue";
 // 陈日兴引入的
-
+import userList from "../components/crx/userList.vue";
 // 黄日隆引入的
 import Order from "../components/hrl/order.vue";
 
@@ -36,9 +36,13 @@ let router = new VueRouter({
      * 不方便注释的地方在这里注释
      */
     routes: [{
-        name:"order",
-        path:"/order",
-        component:Order
+        name: "userList",
+        path: "/userList",
+        component: userList
+    }, {
+        name: "order",
+        path: "/order",
+        component: Order
     }]
 })
 
