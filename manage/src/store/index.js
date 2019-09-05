@@ -12,7 +12,7 @@ Vue.use(Vuex);
 import common from "./common.js";
 
 // 陈日兴引入的模块
-
+import userlist from "./userlist.js";
 
 // 黄日隆引入的模块
 
@@ -23,7 +23,8 @@ import common from "./common.js";
 // 实例化Vuex并且配置参数
 let store = new Vuex.Store({
     modules: {
-        common
+        common,
+        userlist
     }
 })
 

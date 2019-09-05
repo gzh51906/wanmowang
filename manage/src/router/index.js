@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 // 引入单页面组件
 // import Home from "../pages/Home.vue";
 // 陈日兴引入的
-
+import userList from "../components/crx/userList.vue";
 // 黄日隆引入的
 
 
@@ -35,13 +35,18 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
-    routes: []
+    routes: [{
+        name: "userList",
+        path: "/userList",
+        component: userList
+    }]
 })
 
 // 防止刷新的时候状态消失
 import store from "../store";
 router.beforeEach(async (to, from, next) => {
     store.commit("update");
+    next();
 })
 
 export default router;
