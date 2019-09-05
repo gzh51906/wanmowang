@@ -12,6 +12,7 @@ let cOrder = require("./crx/cOrder");
 // 黄日隆引入
 let hHome = require('./hrl/hHome');
 let hAllgoods = require('./hrl/hlistpage');
+let hOrder = require('./hrl/Horder');
 // 苏沛龙引入
 let Lfind = require("./spl/Lfind.js")
 let Ldes = require("./spl/Ldes.js")
@@ -43,6 +44,7 @@ Router.use("/crx", cOrder);
 // 黄日隆引入
 Router.use('/hrl', hHome);
 Router.use('/hrl',hAllgoods);
+Router.use('/hrl',hOrder);
 // 苏沛龙引入
 Router.use("/spl", Lfind);
 Router.use("/spl", Ldes);

@@ -46,6 +46,7 @@ let router = new VueRouter({
 import store from "../store";
 router.beforeEach(async (to, from, next) => {
     store.commit("update");
+    next();
 })
 
 export default router;
