@@ -15,6 +15,7 @@ let hAllgoods = require('./hrl/hlistpage');
 // 苏沛龙引入
 let Lfind = require("./spl/Lfind.js")
 let Ldes = require("./spl/Ldes.js")
+let Lcheck = require("./spl/Lcheck")
 
 Router.use(express.json(), express.urlencoded({
     extended: false
@@ -43,7 +44,8 @@ Router.use("/crx", cOrder);
 Router.use('/hrl', hHome);
 Router.use('/hrl',hAllgoods);
 // 苏沛龙引入
-Router.use("/spl", Lfind)
-Router.use("/spl", Ldes)
+Router.use("/spl", Lfind);
+Router.use("/spl", Ldes);
+Router.use("/spl", Lcheck)
 
 module.exports = Router;

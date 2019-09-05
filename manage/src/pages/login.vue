@@ -13,7 +13,12 @@
         <el-input type="text" v-model="ruleForm.name" placeholder="请输入账号"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="pass">
-        <el-input type="password" v-model="ruleForm.pass" placeholder="请输入密码"></el-input>
+        <el-input
+          type="password"
+          v-model="ruleForm.pass"
+          placeholder="请输入密码"
+          @keyup.13.native="submitForm('ruleForm')"
+        ></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
@@ -54,12 +59,24 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
-          alert("submit!");
+          let { data } = await this.$axios({
+            methods: "get",
+            url: "http://127.0.0.1:1901/spl/login",
+            params: {
+              username: this.ruleForm.name,
+              password: this.ruleForm.pass
+            }
+          });
+
+          if (data.code == 1) {
+            alert("登录成功");
+            this.$store.commit("userChange", this.ruleForm.name);
+          } else {
+            alert("用户名或密码错误");
+          }
         } else {
-          console.log("error submit!!");
-          this.$store.commit("userChange");
           return false;
         }
       });
