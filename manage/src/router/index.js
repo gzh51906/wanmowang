@@ -17,7 +17,7 @@ Vue.use(VueRouter);
 
 
 // 苏沛龙引入的
-
+import goodlist from "../components/spl/goodlist.vue"
 
 // 实例化路由
 let router = new VueRouter({
@@ -35,13 +35,18 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
-    routes: []
+    routes: [{
+        name: "goodlist",
+        path: "/goodlist",
+        component: goodlist
+    }]
 })
 
 // 防止刷新的时候状态消失
 import store from "../store";
 router.beforeEach(async (to, from, next) => {
     store.commit("update");
+    next()
 })
 
 export default router;

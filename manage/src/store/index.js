@@ -18,12 +18,14 @@ import common from "./common.js";
 
 
 // 苏沛龙引入的模块
+import goods from "../store/Lgoodsdata";
 
 
 // 实例化Vuex并且配置参数
 let store = new Vuex.Store({
     modules: {
-        common
+        common,
+        goods
     }
 })
 

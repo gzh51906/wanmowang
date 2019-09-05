@@ -4,7 +4,7 @@
       <h1>玩墨网后台管理系统</h1>
       <el-collapse v-model="activeName" accordion class="overflow">
         <el-collapse-item title="商品管理" name="1">
-          <div @click="change('/商品管理/商品列表')">商品列表</div>
+          <div @click="change('/商品管理/商品列表','/goodlist')">商品列表</div>
           <div @click="change('/商品管理/商品分类')">商品分类</div>
         </el-collapse-item>
         <el-collapse-item title="用户管理" name="2">
@@ -35,8 +35,9 @@ export default {
     };
   },
   methods: {
-    change(title) {
+    change(title, path) {
       this.$store.commit("updateTitle", "首页" + title);
+      this.$router.push(path);
     },
     ...mapMutations({
       tuichu: "removeUser"
