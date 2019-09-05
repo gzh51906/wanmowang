@@ -14,7 +14,7 @@ Vue.use(VueRouter);
 // 陈日兴引入的
 
 // 黄日隆引入的
-
+import Order from "../components/hrl/order.vue";
 
 // 苏沛龙引入的
 
@@ -35,7 +35,11 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
-    routes: []
+    routes: [{
+        name:"order",
+        path:"/order",
+        component:Order
+    }]
 })
 
 export default router;
