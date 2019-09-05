@@ -16,6 +16,7 @@ import userList from "../components/crx/userList.vue";
 import userEdit from "../components/crx/userEdit.vue";
 // 黄日隆引入的
 import Order from "../components/hrl/order.vue";
+import Classification from "../components/hrl/classification.vue";
 
 // 苏沛龙引入的
 
@@ -48,6 +49,10 @@ let router = new VueRouter({
         name: "userEdit",
         path: "/userEdit",
         component: userEdit
+    }, {
+        name: 'class',
+        path: '/class',
+        component: Classification
     }]
 })
 

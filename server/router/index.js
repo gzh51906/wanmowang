@@ -13,6 +13,8 @@ let manage_user = require("./crx/manage_user");
 // 黄日隆引入
 let hHome = require('./hrl/hHome');
 let hAllgoods = require('./hrl/hlistpage');
+let hOrder = require('./hrl/Horder');
+let hClass = require('./hrl/Hclass');
 // 苏沛龙引入
 let Lfind = require("./spl/Lfind.js")
 let Ldes = require("./spl/Ldes.js")
@@ -44,7 +46,11 @@ Router.use("/crx", cOrder);
 Router.use("/crx", manage_user);
 // 黄日隆引入
 Router.use('/hrl', hHome);
-Router.use('/hrl', hAllgoods);
+Router.use('/hrl',hAllgoods);
+Router.use('/hrl',hOrder);
+// Router.use('/hrl', hAllgoods);
+Router.use('/hrl', hClass);
+
 // 苏沛龙引入
 Router.use("/spl", Lfind);
 Router.use("/spl", Ldes);
