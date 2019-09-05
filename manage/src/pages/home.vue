@@ -5,7 +5,7 @@
       <el-collapse v-model="activeName" accordion class="overflow">
         <el-collapse-item title="商品管理" name="1">
           <div @click="change('/商品管理/商品列表')">商品列表</div>
-          <div @click="change('/商品管理/商品分类')">商品分类</div>
+          <div @click="change('/商品管理/商品分类','/class')">商品分类</div>
         </el-collapse-item>
         <el-collapse-item title="用户管理" name="2">
           <div @click="change('/用户管理/用户列表','/userList')">用户列表</div>
@@ -13,7 +13,7 @@
           <div @click="change('/用户管理/管理人员')">管理人员</div>
         </el-collapse-item>
         <el-collapse-item title="订单管理" name="3">
-          <div @click="change('/订单管理/订单列表')">订单列表</div>
+          <div @click="change('/订单管理/订单列表','/order')">订单列表</div>
         </el-collapse-item>
       </el-collapse>
     </el-aside>

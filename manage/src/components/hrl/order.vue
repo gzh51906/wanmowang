@@ -6,7 +6,7 @@
       :data="pageData"
       tooltip-effect="dark"
       style="width: 100%"
-      highlight-current-row
+      :default-sort = "{prop: 'price', order: 'descending'}"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
@@ -14,7 +14,7 @@
         <template slot-scope="scope">{{ scope.row._id }}</template>
       </el-table-column>
       <el-table-column prop="desc" label="商品" width="120" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="price" label="单价"></el-table-column>
+      <el-table-column prop="price" label="单价" sortable></el-table-column>
       <el-table-column prop="num" label="数量"></el-table-column>
       <el-table-column label="运费">
         <template>{{ 0 }}</template>
@@ -115,10 +115,12 @@ export default {
     handleCurrentChange(val) {
       let newval = 4 * val;
       this.pageData = this.tableData.slice(newval - 4,newval);
-    }
+    },
+    
   }
 };
 </script>
 
 <style scoped>
+
 </style>

@@ -15,6 +15,7 @@ Vue.use(VueRouter);
 import userList from "../components/crx/userList.vue";
 // 黄日隆引入的
 import Order from "../components/hrl/order.vue";
+import Classification from "../components/hrl/classification.vue";
 
 // 苏沛龙引入的
 
@@ -43,6 +44,10 @@ let router = new VueRouter({
         name: "order",
         path: "/order",
         component: Order
+    },{
+        name:'class',
+        path:'/class',
+        component: Classification
     }]
 })
 
