@@ -12,9 +12,11 @@ Vue.use(VueRouter);
 // 引入单页面组件
 // import Home from "../pages/Home.vue";
 // 陈日兴引入的
-
+import userList from "../components/crx/userList.vue";
+import userEdit from "../components/crx/userEdit.vue";
 // 黄日隆引入的
-
+import Order from "../components/hrl/order.vue";
+import Classification from "../components/hrl/classification.vue";
 
 // 苏沛龙引入的
 import goodlist from "../components/spl/goodlist.vue"
@@ -39,6 +41,22 @@ let router = new VueRouter({
         name: "goodlist",
         path: "/goodlist",
         component: goodlist
+    }, {
+        name: "userList",
+        path: "/userList",
+        component: userList
+    }, {
+        name: "order",
+        path: "/order",
+        component: Order
+    }, {
+        name: "userEdit",
+        path: "/userEdit",
+        component: userEdit
+    }, {
+        name: 'class',
+        path: '/class',
+        component: Classification
     }]
 })
 
@@ -46,7 +64,7 @@ let router = new VueRouter({
 import store from "../store";
 router.beforeEach(async (to, from, next) => {
     store.commit("update");
-    next()
+    next();
 })
 
 export default router;
