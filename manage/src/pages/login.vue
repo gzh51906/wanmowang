@@ -50,10 +50,7 @@ export default {
           { required: true, message: "请输入密码", trigger: "blur" },
           { validator: validatePass, trigger: "blur" }
         ],
-        name: [
-          { required: true, message: "请输入账号", trigger: "blur" },
-          { min: 3, max: 12, message: "长度在 3 到 12 个字符", trigger: "blur" }
-        ]
+        name: [{ required: true, message: "请输入账号", trigger: "blur" }]
       }
     };
   },

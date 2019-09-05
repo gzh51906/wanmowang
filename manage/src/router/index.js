@@ -42,4 +42,10 @@ let router = new VueRouter({
     }]
 })
 
+// 防止刷新的时候状态消失
+import store from "../store";
+router.beforeEach(async (to, from, next) => {
+    store.commit("update");
+})
+
 export default router;
