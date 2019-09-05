@@ -13,6 +13,7 @@ Vue.use(VueRouter);
 // import Home from "../pages/Home.vue";
 // 陈日兴引入的
 import userList from "../components/crx/userList.vue";
+import userEdit from "../components/crx/userEdit.vue";
 // 黄日隆引入的
 import Order from "../components/hrl/order.vue";
 
@@ -43,6 +44,10 @@ let router = new VueRouter({
         name: "order",
         path: "/order",
         component: Order
+    }, {
+        name: "userEdit",
+        path: "/userEdit",
+        component: userEdit
     }]
 })
 

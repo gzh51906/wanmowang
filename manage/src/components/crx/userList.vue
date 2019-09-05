@@ -14,6 +14,9 @@
           <el-select v-model="select" slot="prepend" placeholder="请选择">
             <el-option label="用户名" value="username"></el-option>
             <el-option label="邮箱地址" value="email"></el-option>
+            <el-option label="性别" value="gender"></el-option>
+            <el-option label="职业" value="job"></el-option>
+            <el-option label="所在城市" value="city"></el-option>
           </el-select>
           <el-button slot="append" icon="el-icon-search" @click="searchBtn"></el-button>
         </el-input>
@@ -39,7 +42,7 @@
         <el-table-column prop="city" label="所在城市"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" size="mini">
+            <el-button type="primary" size="mini" @click="edit(scope.row)">
               <i class="el-icon-edit"></i> 编辑
             </el-button>
           </template>
@@ -101,6 +104,33 @@ export default {
               }
             }
           );
+        } else if (this.select === "gender") {
+          result = await this.$axios.get(
+            "http://127.0.0.1:1901/crx/manage_userGet",
+            {
+              params: {
+                gender: this.input
+              }
+            }
+          );
+        } else if (this.select === "job") {
+          result = await this.$axios.get(
+            "http://127.0.0.1:1901/crx/manage_userGet",
+            {
+              params: {
+                job: this.input
+              }
+            }
+          );
+        } else if (this.select === "city") {
+          result = await this.$axios.get(
+            "http://127.0.0.1:1901/crx/manage_userGet",
+            {
+              params: {
+                city: this.input
+              }
+            }
+          );
         }
         this.$store.commit("getData", result.data.data);
         if (this.$store.state.userlist.data.length % 8 !== 0) {
@@ -135,6 +165,14 @@ export default {
             _id: item._id
           }
         });
+      });
+    },
+    edit(data) {
+      this.$router.push({
+        path: "/userEdit",
+        query: {
+          id: data._id
+        }
       });
     }
   }

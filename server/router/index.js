@@ -24,7 +24,7 @@ Router.use(express.json(), express.urlencoded({
 Router.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS,PATCH");
 
     // 跨域请求CORS中的预请求
     if (req.method == "OPTIONS") {
