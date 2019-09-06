@@ -14,9 +14,23 @@ let {
 
 //获取商品类别数据
 Router.get('/class', async (req, res, next) => {
-    let {title} = req.query;
+    let {type} = req.query;
     let data = await find("goods", {
-        'data.result.cate.title':title
+        'type':type
+    });
+    res.send(formatData({
+        data: data
+    }));
+    next();
+});
+
+Router.get('/classnum', async (req, res, next) => {
+    let {
+        title
+    } = req.query;
+    console.log(title)
+    let data = await find("goods", {
+        'data.result.cate.title': title
     });
     res.send(formatData({
         data: data
