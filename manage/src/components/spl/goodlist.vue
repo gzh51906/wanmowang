@@ -118,29 +118,41 @@ export default {
   },
   methods: {
     goto() {
-      this.$router.push("/editor");
+      if (this.$store.state.common.insert) {
+        this.$router.push("/editor");
+      } else {
+        alert("权限不足");
+      }
     },
     gotoEditor(goodsmsg) {
-      this.$router.push({ path: "/editor", query: { goodsmsg } });
+      if (this.$store.state.common.update) {
+        this.$router.push({ path: "/editor", query: { goodsmsg } });
+      } else {
+        alert("权限不足");
+      }
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
       this.goodsmsg = val;
     },
     async delgoods() {
-      this.$store.commit("removeMoreItem", this.goodsmsg);
-      this.changePage();
-      let goods_id = this.goodsmsg.map(ele => {
-        return ele.goods_id;
-      });
-      let { data } = await this.$axios.delete(
-        "http://127.0.0.1:1901/spl/removeMoregoods",
-        {
-          params: {
-            goods_id: goods_id
+      if (this.$store.state.common.delete) {
+        this.$store.commit("removeMoreItem", this.goodsmsg);
+        this.changePage();
+        let goods_id = this.goodsmsg.map(ele => {
+          return ele.goods_id;
+        });
+        let { data } = await this.$axios.delete(
+          "http://127.0.0.1:1901/spl/removeMoregoods",
+          {
+            params: {
+              goods_id: goods_id
+            }
           }
-        }
-      );
+        );
+      } else {
+        alert("权限不足");
+      }
     },
     changePage(page) {
       var page = page || 1;
@@ -162,16 +174,20 @@ export default {
       }
     },
     async remove(goodsmsg) {
-      this.$store.commit("removeItem", goodsmsg);
-      this.changePage();
-      let { data } = await this.$axios.delete(
-        "http://127.0.0.1:1901/spl/removegoods",
-        {
-          params: {
-            _id: goodsmsg.goods_id
+      if (this.$store.state.common.delete) {
+        this.$store.commit("removeItem", goodsmsg);
+        this.changePage();
+        let { data } = await this.$axios.delete(
+          "http://127.0.0.1:1901/spl/removegoods",
+          {
+            params: {
+              _id: goodsmsg.goods_id
+            }
           }
-        }
-      );
+        );
+      } else {
+        alert("权限不足");
+      }
     },
     async search(val) {
       let { data } = await this.$axios({

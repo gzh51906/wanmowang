@@ -126,6 +126,8 @@ router.beforeEach(async (to, from, next) => {
     if (to.matched.some(item => item.meta.manage)) {
         if (result.data.data[0].manage) {
             next();
+        } else {
+            alert("权限不足");
         }
     } else {
         store.commit("updateTitle", localStorage.getItem("title"));
