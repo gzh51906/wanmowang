@@ -1,10 +1,10 @@
 <template>
   <div class="box">
     <div class="head">
-      <el-button type="info" size="small" icon="el-icon-circle-plus">添加</el-button>
-      <el-button type="danger" size="small" icon="el-icon-delete">删除</el-button>
-      <el-input v-model="input" placeholder="请输入内容"></el-input>
-      <el-select v-model="value" placeholder="请选择分类" @click="search(value)">
+      <el-button type="info" size="small" icon="el-icon-circle-plus" @click="goto">添加</el-button>
+      <el-button type="danger" size="small" icon="el-icon-delete" @click="delgoods">删除</el-button>
+      <el-input v-model="input" placeholder="请输入内容" @keyup.13.native="search(input)"></el-input>
+      <el-select v-model="value" clearable placeholder="请选择分类" @click="search(value)">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -40,7 +40,7 @@
 
         <el-table-column label="操作" width="120">
           <template slot-scope="scope">
-            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle @click="gotoEditor(scope.row)"></el-button>
             <el-button type="danger" icon="el-icon-delete" circle @click="remove(scope.row)"></el-button>
           </template>
         </el-table-column>
@@ -61,9 +61,6 @@ export default {
   data() {
     return {
       options: [
-        {
-          value: "-请选择-"
-        },
         {
           value: "服饰"
         },
@@ -92,6 +89,7 @@ export default {
       value: "",
       input: "",
       total: 10,
+      goodsmsg: "",
       tableData: [],
       multipleSelection: []
     };
@@ -119,17 +117,30 @@ export default {
     this.$store.state.goods.data = data.data;
   },
   methods: {
-    toggleSelection(rows) {
-      if (rows) {
-        rows.forEach(row => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
-      } else {
-        this.$refs.multipleTable.clearSelection();
-      }
+    goto() {
+      this.$router.push("/editor");
+    },
+    gotoEditor(goodsmsg) {
+      this.$router.push({ path: "/editor", query: { goodsmsg } });
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
+      this.goodsmsg = val;
+    },
+    async delgoods() {
+      this.$store.commit("removeMoreItem", this.goodsmsg);
+      this.changePage();
+      let goods_id = this.goodsmsg.map(ele => {
+        return ele.goods_id;
+      });
+      let { data } = await this.$axios.delete(
+        "http://127.0.0.1:1901/spl/removeMoregoods",
+        {
+          params: {
+            goods_id: goods_id
+          }
+        }
+      );
     },
     changePage(page) {
       var page = page || 1;
@@ -192,8 +203,8 @@ export default {
   border: 1px solid #ccc;
 }
 .page {
-  width: 100%;
-  margin: auto;
+  margin-left: 250px;
+  margin-top: 20px;
 }
 img {
   width: 40px;

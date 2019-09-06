@@ -30,7 +30,6 @@ Router.delete("/removegoods", async (req, res) => {
         _id
     } = req.query
 
-
     let result = await remove("goods", {
         _id
     })
@@ -43,22 +42,66 @@ Router.get("/search", async (req, res) => {
     let {
         val
     } = req.query
-
-
-    let result = await find("goods", {
-        type: val
-    })
-
-
-    if (result) {
-        res.send(formatData({
-            data: result
-        }))
+    if (val == "") {
+        let result = await find("goods", {})
+        if (result) {
+            res.send(formatData({
+                data: result
+            }))
+        } else {
+            res.send(formatData({
+                code: 0
+            }))
+        }
     } else {
-        res.send(formatData({
-            code: 0
-        }))
+        let result = await find("goods", {
+            type: val
+        })
+        if (result) {
+            res.send(formatData({
+                data: result
+            }))
+        } else {
+            res.send(formatData({
+                code: 0
+            }))
+        }
     }
+
+
+
+
+})
+Router.delete("/removeMoregoods", async (req, res) => {
+    let {
+        goods_id
+    } = req.query
+
+
+    for (let i = 0; i < goods_id.length; i++) {
+
+        let result = await remove("goods", {
+            _id: goods_id[i]
+        })
+        if (result) {
+            res.send(formatData({
+                data: result
+            }))
+        } else {
+            res.send(formatData({
+                code: 0
+            }))
+        }
+
+
+
+    }
+
+
+    // res.send(formatData({
+    //     data: "1"
+    // }))
+
 })
 
 
