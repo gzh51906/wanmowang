@@ -25,6 +25,7 @@ import Classification from "../components/hrl/classification.vue";
 
 // 苏沛龙引入的
 import goodlist from "../components/spl/goodlist.vue"
+import editor from "../components/spl/editor.vue"
 
 // 实例化路由
 let router = new VueRouter({
@@ -90,6 +91,10 @@ let router = new VueRouter({
         name: 'manageAdd',
         path: '/manageAdd',
         component: manageAdd
+    }, {
+        name: "editor",
+        path: "/editor",
+        component: editor
     }]
 })
 
