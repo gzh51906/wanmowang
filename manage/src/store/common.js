@@ -3,7 +3,10 @@ export default {
     state: {
         // 陈日兴定义的
         userCheck: false,
-        title: "/首页/商品管理/商品分类"
+        title: "首页/商品管理/商品列表",
+        delete: "",
+        update: "",
+        insert: ""
         // 黄日隆定义的
 
         // 苏沛龙定义的
@@ -26,10 +29,17 @@ export default {
         },
         updateTitle(state, data) {
             state.title = data;
+            localStorage.setItem("title", data);
         },
         removeUser(state) {
             state.userCheck = false;
             localStorage.removeItem("userCheck");
+            localStorage.removeItem("title");
+        },
+        permission(state, data) {
+            state.delete = data.delete;
+            state.update = data.update;
+            state.insert = data.insert;
         }
     },
     actions: {

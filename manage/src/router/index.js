@@ -14,6 +14,11 @@ Vue.use(VueRouter);
 // 陈日兴引入的
 import userList from "../components/crx/userList.vue";
 import userEdit from "../components/crx/userEdit.vue";
+import userAdd from "../components/crx/userAdd.vue";
+import userManage from "../components/crx/userManage.vue";
+import zhuye from "../components/crx/common.vue";
+import manageEdit from "../components/crx/manageEdit.vue";
+import manageAdd from "../components/crx/manageAdd.vue";
 // 黄日隆引入的
 import Order from "../components/hrl/order.vue";
 import Classification from "../components/hrl/classification.vue";
@@ -45,6 +50,11 @@ let router = new VueRouter({
         path: "/goodlist",
         component: goodlist
     }, {
+        path: "/",
+        redirect: {
+            path: "/zhuye"
+        }
+    }, {
         name: "userList",
         path: "/userList",
         component: userList
@@ -69,6 +79,29 @@ let router = new VueRouter({
         path:'/addtype',
         component: Addtype
     },{
+        name: 'userAdd',
+        path: '/userAdd',
+        component: userAdd
+    }, {
+        name: 'userManage',
+        path: '/userManage',
+        component: userManage,
+        meta: {
+            manage: true
+        }
+    }, {
+        name: 'zhuye',
+        path: '/zhuye',
+        component: zhuye
+    }, {
+        name: 'manageEdit',
+        path: '/manageEdit',
+        component: manageEdit
+    }, {
+        name: 'manageAdd',
+        path: '/manageAdd',
+        component: manageAdd
+    }, {
         name: "editor",
         path: "/editor",
         component: editor
@@ -76,10 +109,31 @@ let router = new VueRouter({
 })
 
 // 防止刷新的时候状态消失
+import axios from 'axios';
 import store from "../store";
 router.beforeEach(async (to, from, next) => {
     store.commit("update");
-    next();
+    let result = await axios.get("http://127.0.0.1:1901/crx/manage_userManage", {
+        params: {
+            username: localStorage.getItem("userCheck")
+        }
+    });
+    store.commit("permission", {
+        delete: result.data.data[0].delete,
+        update: result.data.data[0].update,
+        insert: result.data.data[0].insert
+    })
+    if (to.matched.some(item => item.meta.manage)) {
+        if (result.data.data[0].manage) {
+            next();
+        }
+    } else {
+        store.commit("updateTitle", localStorage.getItem("title"));
+        if (!localStorage.getItem("title") || localStorage.getItem("title") === "null") {
+            store.commit("updateTitle", "首页/商品管理/商品列表");
+        }
+        next();
+    }
 })
 
 export default router;

@@ -44,10 +44,70 @@ Router.get("/manage_userEditRead",async (req,res,next)=>{
     next();
 })
 
+//修改用户信息
 Router.patch("/manage_userEditPatch",async (req,res,next)=>{
     let {data,_id} = req.body;
     let result = await update("user",{_id},{$set:data});
     res.send(formatData());
+    next();
+})
+
+// 添加用户
+Router.post("/manage_userAdd",async (req,res,next)=>{
+    let {data} = req.body;
+    try {
+        let result = await insert("user", data);
+        res.send(formatData());
+    } catch (error) {
+        res.send(formatData({code:0}));
+    }
+    next();
+})
+
+// 获取管理员信息
+Router.get("/manage_userManage",async (req,res,next)=>{
+    let {username,_id} = req.query;
+    let result;
+    if(username){
+        result = await find("manage_user",{username});
+    }else if(_id){
+        result = await find("manage_user",{_id});
+    }else{
+        result = await find("manage_user",{});
+    }
+    res.send(formatData({data:result}));
+    next();
+})
+
+// 删除管理员的信息
+Router.delete("/manage_removeManage",async (req,res,next)=>{
+    let {_id} = req.query;
+    try {
+        let result = await remove("manage_user",{_id});
+        res.send(formatData())
+    } catch (error) {
+        res.send(formatData({code:0}))
+    }
+    next();
+})
+
+// 修改管理员的信息
+Router.patch("/manage_patchManage",async (req,res,next)=>{
+    let {data,_id} = req.body;
+    let result = await update("manage_user",{_id},{$set:data});
+    res.send(formatData());
+    next();
+})
+
+// 添加管理员
+Router.post("/manage_manageAdd",async (req,res,next)=>{
+    let {data} = req.body;
+    try {
+        let result = await insert("manage_user", data);
+        res.send(formatData());
+    } catch (error) {
+        res.send(formatData({code:0}));
+    }
     next();
 })
 
