@@ -9,8 +9,8 @@
         </el-collapse-item>
         <el-collapse-item title="用户管理" name="2">
           <div @click="change('/用户管理/用户列表','/userList')">用户列表</div>
-          <div @click="change('/用户管理/添加用户')">添加用户</div>
-          <div @click="change('/用户管理/管理人员')">管理人员</div>
+          <div @click="change('/用户管理/添加用户','/userAdd')">添加用户</div>
+          <div @click="change('/用户管理/管理人员','/userManage')">管理人员</div>
         </el-collapse-item>
         <el-collapse-item title="订单管理" name="3">
           <div @click="change('/订单管理/订单列表','/order')">订单列表</div>
@@ -28,6 +28,7 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import router from "../router";
 export default {
   data() {
     return {
@@ -40,7 +41,10 @@ export default {
       this.$router.push(path);
     },
     ...mapMutations({
-      tuichu: "removeUser"
+      tuichu: commit => {
+        commit("removeUser");
+        router.push("/");
+      }
     })
   }
 };

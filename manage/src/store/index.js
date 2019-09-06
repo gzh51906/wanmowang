@@ -13,6 +13,7 @@ import common from "./common.js";
 
 // 陈日兴引入的模块
 import userlist from "./userlist.js";
+import manage from "./manage";
 
 // 黄日隆引入的模块
 
@@ -26,7 +27,8 @@ let store = new Vuex.Store({
         modules: {
                 common,
                 goods,
-                userlist
+                userlist,
+                manage
         }
 })
 
