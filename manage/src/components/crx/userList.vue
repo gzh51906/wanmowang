@@ -151,29 +151,37 @@ export default {
       this.data = this.$store.state.userlist.data.slice(num * 8, num * 8 + 8);
     },
     async remove() {
-      this.$store.commit("removeData", this.multipleSelection);
-      if (this.$store.state.userlist.data.length % 8 !== 0) {
-        this.pageNum =
-          Math.ceil(this.$store.state.userlist.data.length / 8) * 10;
-      } else {
-        this.pageNum = (this.$store.state.userlist.data.length / 8) * 10;
-      }
-      this.pageChange();
-      this.multipleSelection.forEach(item => {
-        this.$axios.delete("http://127.0.0.1:1901/crx//manage_userRemove", {
-          params: {
-            _id: item._id
-          }
+      if (this.$store.state.common.delete) {
+        this.$store.commit("removeData", this.multipleSelection);
+        if (this.$store.state.userlist.data.length % 8 !== 0) {
+          this.pageNum =
+            Math.ceil(this.$store.state.userlist.data.length / 8) * 10;
+        } else {
+          this.pageNum = (this.$store.state.userlist.data.length / 8) * 10;
+        }
+        this.pageChange();
+        this.multipleSelection.forEach(item => {
+          this.$axios.delete("http://127.0.0.1:1901/crx//manage_userRemove", {
+            params: {
+              _id: item._id
+            }
+          });
         });
-      });
+      } else {
+        alert("权限不足");
+      }
     },
     edit(data) {
-      this.$router.push({
-        path: "/userEdit",
-        query: {
-          id: data._id
-        }
-      });
+      if (this.$store.state.common.update) {
+        this.$router.push({
+          path: "/userEdit",
+          query: {
+            id: data._id
+          }
+        });
+      } else {
+        alert("权限不足");
+      }
     }
   }
 };

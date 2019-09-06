@@ -38,7 +38,15 @@ export default {
   methods: {
     change(title, path) {
       this.$store.commit("updateTitle", "首页" + title);
-      this.$router.push(path);
+      if (path === "/userAdd") {
+        if (this.$store.state.common.insert) {
+          this.$router.push(path);
+        } else {
+          alert("权限不足");
+        }
+      } else {
+        this.$router.push(path);
+      }
     },
     ...mapMutations({
       tuichu: commit => {
