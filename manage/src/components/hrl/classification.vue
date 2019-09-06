@@ -1,9 +1,15 @@
 <template>
   <div>
-    <el-button-group>
-      <el-button type="primary" icon="el-icon-circle-plus">添加</el-button>
-      <el-button type="primary" icon="el-icon-delete">删除</el-button>
-    </el-button-group>
+    <el-button slot="reference" type="primary" icon="el-icon-circle-plus" @click="Haddclass('addclass')">添加</el-button>
+    <el-popover placement="top" width="160" v-model="visible">
+      <p>确定删除吗？</p>
+      <div style="text-align: right; margin: 0">
+        <el-button size="mini" type="text" @click="visible = false">取消</el-button>
+        <el-button type="primary" size="mini" @click="visible = false">确定</el-button>
+      </div>
+        <el-button slot="reference" type="danger" icon="el-icon-delete">删除</el-button>
+    </el-popover>
+
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -13,7 +19,7 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column label="#" width="120"></el-table-column>
+      <el-table-column type="index" label="#" width="120"></el-table-column>
       <el-table-column label="商品类型" width="120">
         <template slot-scope="scope">
           <el-dropdown @command="handleCommand" trigger="click">
@@ -32,17 +38,22 @@
       <el-table-column prop="num" label="数量" sortable show-overflow-tooltip>
         <template slot-scope="scope">{{ scope.row.num }}</template>
       </el-table-column>
-      <el-table-column  label="操作">
+       <el-table-column label="时间" sortable show-overflow-tooltip>
+        <template>{{ time }}</template>
+      </el-table-column>
+      <el-table-column label="操作">
         <el-button-group>
-          <el-button size="small" type="primary" icon="el-icon-edit" round>修改</el-button>
+          <el-button
+            size="small"
+            type="primary"
+            icon="el-icon-edit"
+            round
+            @click="Haddtype('addtype')"
+          >修改</el-button>
           <el-button size="small" type="danger" icon="el-icon-delete" round>删除</el-button>
         </el-button-group>
       </el-table-column>
     </el-table>
-    <!-- <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
-      <el-button @click="toggleSelection()">取消选择</el-button>
-    </div> -->
   </div>
 </template>
 
@@ -53,40 +64,42 @@ export default {
       tableData: [
         {
           name: "服饰",
-          num:''
+          num: ""
         },
         {
           name: "搭配",
-          num:''
+          num: ""
         },
         {
           name: "数码",
-          num:''
+          num: ""
         },
         {
           name: "餐具",
-          num:''
+          num: ""
         },
         {
           name: " 出行",
-          num:''
+          num: ""
         },
         {
           name: " 文具",
-          num:''
+          num: ""
         },
         {
           name: "居家",
-          num:''
+          num: ""
         },
         {
           name: "品牌",
-          num:''
+          num: ""
         }
       ],
       multipleSelection: [],
       clothTpye: [],
-      typeNum: ""
+      typeNum: "",
+      visible: false,
+      time:'2019-11-11'
     };
   },
   async created() {
@@ -150,28 +163,18 @@ export default {
     this.tableData[7].num = ppData.data.data.length;
   },
   methods: {
-    // toggleSelection(rows) {
-    //   if (rows) {
-    //     rows.forEach(row => {
-    //       this.$refs.multipleTable.toggleRowSelection(row);
-    //     });
-    //   } else {
-    //     this.$refs.multipleTable.clearSelection();
-    //   }
-    // },
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
     async handleCommand(command) {
-
-     let {
+      let {
         data: { data }
       } = await this.$axios.get("http://127.0.0.1:1901/hrl/classnum", {
         params: {
           title: command
         }
       });
-      console.log(data)
+      console.log(data);
       this.typeNum = data.length;
     },
     async hTypelis(type) {
@@ -185,6 +188,12 @@ export default {
       });
       this.typeNum = data.length;
       this.clothTpye = data[0].type;
+    },
+    Haddclass(path) {
+      this.$router.push(path);
+    },
+    Haddtype(path) {
+      this.$router.push(path);
     }
   }
 };

@@ -40,7 +40,7 @@
       </el-table-column>
     </el-table>
     <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
+      <el-button @click="toggleSelection([pageData[1], pageData[2]])">切换第二、第三行的选中状态</el-button>
       <el-button @click="toggleSelection()">取消选择</el-button>
     </div>
     <div class="block">
@@ -100,13 +100,16 @@ export default {
       this.tableData = newData.data.data;
       this.pageData = newData.data.data.slice(0,4);
     },
-    complete(complete, id) {
+    async complete(complete, id) {
       for (let i = 0; i < this.tableData.length; i++) {
         if (this.tableData[i]._id === id) {
           this.tableData[i].complete = true;
           this.$refs.multipleTable.setCurrentRow(id) 
         }
-      }
+      };
+      let {data:{data}} = await this.$axios.patch("http://127.0.0.1:1901/hrl/order",{
+          _id:id
+      })
     },
     //分页功能
     handleSizeChange(val) {

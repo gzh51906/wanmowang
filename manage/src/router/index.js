@@ -17,6 +17,8 @@ import userEdit from "../components/crx/userEdit.vue";
 // 黄日隆引入的
 import Order from "../components/hrl/order.vue";
 import Classification from "../components/hrl/classification.vue";
+import Addclass from "../components/hrl/addClass.vue";
+import Addtype from "../components/hrl/addType.vue";
 
 // 苏沛龙引入的
 import goodlist from "../components/spl/goodlist.vue"
@@ -59,6 +61,14 @@ let router = new VueRouter({
         path: '/class',
         component: Classification
     }, {
+        name:'addclass',
+        path:"/addclass",
+        component: Addclass
+    },{
+        name:'addtype',
+        path:'/addtype',
+        component: Addtype
+    },{
         name: "editor",
         path: "/editor",
         component: editor

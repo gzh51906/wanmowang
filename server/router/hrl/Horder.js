@@ -21,19 +21,35 @@ Router.get('/order', async (req, res, next) => {
 });
 
 //获取删除后的订单数据
-Router.delete('/order',async(req,res,next)=>{
+Router.delete('/order', async (req, res, next) => {
     let {
         goods_id
     } = req.query;
-    console.log(goods_id);
     let data = await remove('order', {
-        '_id':goods_id
+        '_id': goods_id
     });
-     res.send(formatData({
-         data: data
-     }));
-     next();
-})
+    res.send(formatData({
+        data: data
+    }));
+    next();
+});
 
+//更新数据
+Router.patch('/order', async (req, res, next) => {
+    let {
+        _id
+    } = req.body;
+    let data = await update('order', {
+        _id
+    }, {
+        $set: {
+            complete:true
+        }
+    });
+    res.send(formatData({
+        data: data
+    }));
+    next();
+})
 
 module.exports = Router;
