@@ -18,7 +18,6 @@ Router.get('/allgoods', async (req, res, next) => {
         title,
         asc
     } = req.query;
-    console.log(title,asc)
     let data = await find('goods', {
         'data.result.cate.title': title
     }, {

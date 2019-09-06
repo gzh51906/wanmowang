@@ -28,7 +28,6 @@ Router.get('/classnum', async (req, res, next) => {
     let {
         title
     } = req.query;
-    console.log(title)
     let data = await find("goods", {
         'data.result.cate.title': title
     });
