@@ -6,7 +6,7 @@ export default {
 
     },
     mutations: {
-        changeData(data) {
+        changeData(state, data) {
             state.data = data
         },
         removeItem(state, goodsmsg) {
