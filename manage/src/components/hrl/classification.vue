@@ -41,7 +41,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="num" label="数量" sortable show-overflow-tooltip></el-table-column>
-      <el-table-column  prop="time" label="时间" sortable show-overflow-tooltip>
+      <el-table-column prop="time" label="时间" sortable show-overflow-tooltip>
         <template slot-scope="scope">{{ scope.row.time.slice(0,10) }}</template>
       </el-table-column>
       <el-table-column label="操作">
@@ -114,42 +114,60 @@ export default {
       this.clothTpye = data[0].type;
     },
     Haddclass(path) {
-      this.$router.push(path);
+      if (this.$store.state.common.insert) {
+        this.$router.push(path);
+      } else {
+        alert("权限不足");
+      }
     },
     Haddtype(path, id) {
-      this.$router.push({ path, query: { id: id } });
+      if (this.$store.state.common.update) {
+        this.$router.push({ path, query: { id: id } });
+      } else {
+        alert("权限不足");
+      }
     },
     //删除单个
     async removeOne(id) {
-      let {
-        data: { data }
-      } = await this.$axios.delete("http://127.0.0.1:1901/hrl/classremove", {
-        params: {
-          _id: id
-        }
-      });
-      let datatype = await this.$axios.get(
-        "http://127.0.0.1:1901/hrl/classtype"
-      );
-      this.tableData = datatype.data.data;
+      if (this.$store.state.common.delete) {
+        let {
+          data: { data }
+        } = await this.$axios.delete("http://127.0.0.1:1901/hrl/classremove", {
+          params: {
+            _id: id
+          }
+        });
+        let datatype = await this.$axios.get(
+          "http://127.0.0.1:1901/hrl/classtype"
+        );
+        this.tableData = datatype.data.data;
+      } else {
+        alert("权限不足");
+      }
     },
     //删除所勾选的
     async removemore(visible) {
-      this.visible = false;
-      console.log(this.multipleSelection);
-      for (let i = 0; i < this.multipleSelection.length; i++) {
-        let {
-          data: { data }
-        } = await this.$axios.delete("http://127.0.0.1:1901/hrl/classremoves", {
-          params: {
-            _id: this.multipleSelection[i]._id
-          }
-        });
+      if (this.$store.state.common.delete) {
+        this.visible = false;
+        for (let i = 0; i < this.multipleSelection.length; i++) {
+          let {
+            data: { data }
+          } = await this.$axios.delete(
+            "http://127.0.0.1:1901/hrl/classremoves",
+            {
+              params: {
+                _id: this.multipleSelection[i]._id
+              }
+            }
+          );
+        }
+        let datatypes = await this.$axios.get(
+          "http://127.0.0.1:1901/hrl/classtype"
+        );
+        this.tableData = datatypes.data.data;
+      } else {
+        alert("权限不足");
       }
-      let datatypes = await this.$axios.get(
-        "http://127.0.0.1:1901/hrl/classtype"
-      );
-      this.tableData = datatypes.data.data;
     }
   }
 };
