@@ -2,7 +2,7 @@
   <div>
     <el-button
       slot="reference"
-      type="primary"
+      type="success"
       icon="el-icon-circle-plus"
       @click="Haddclass('addclass')"
     >添加</el-button>
@@ -10,7 +10,7 @@
       <p>确定删除吗？</p>
       <div style="text-align: right; margin: 0">
         <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-        <el-button type="primary" size="mini" @click="visible = false">确定</el-button>
+        <el-button type="primary" size="mini" @click="removemore(visible)">确定</el-button>
       </div>
       <el-button slot="reference" type="danger" icon="el-icon-delete">删除</el-button>
     </el-popover>
@@ -20,7 +20,7 @@
       :data="tableData"
       tooltip-effect="dark"
       style="width: 100%"
-      :default-sort="{prop: 'num', order: 'descending'}"
+      :default-sort="{prop: ['num','time'], order: 'descending'}"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
@@ -40,22 +40,28 @@
           </el-dropdown>
         </template>
       </el-table-column>
-      <el-table-column prop="num" label="数量" sortable show-overflow-tooltip>
-        <template slot-scope="scope">{{ scope.row.num }}</template>
+      <el-table-column prop="num" label="数量" sortable show-overflow-tooltip></el-table-column>
+      <el-table-column  prop="time" label="时间" sortable show-overflow-tooltip>
+        <template slot-scope="scope">{{ scope.row.time.slice(0,10) }}</template>
       </el-table-column>
-      <el-table-column prop="time" label="时间" sortable show-overflow-tooltip></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-        <el-button-group>
-          <el-button
-            size="small"
-            type="primary"
-            icon="el-icon-edit"
-            round
-            @click="Haddtype('addtype',scope.row._id)"
-          >修改</el-button>
-          <el-button size="small" type="danger" icon="el-icon-delete" round>删除</el-button>
-        </el-button-group>
+          <el-button-group>
+            <el-button
+              size="small"
+              type="primary"
+              icon="el-icon-edit"
+              round
+              @click="Haddtype('addtype',scope.row._id)"
+            >编辑</el-button>
+            <el-button
+              @click="removeOne(scope.row._id)"
+              size="small"
+              type="danger"
+              icon="el-icon-delete"
+              round
+            >删除</el-button>
+          </el-button-group>
         </template>
       </el-table-column>
     </el-table>
@@ -72,7 +78,7 @@ export default {
       typeNum: "",
       visible: false,
       newdata: "",
-      newlis:[],
+      newlis: []
     };
   },
   async created() {
@@ -80,7 +86,6 @@ export default {
       data: { data }
     } = await this.$axios.get("http://127.0.0.1:1901/hrl/classtype");
     this.tableData = data;
-    console.log(this.$route.query);
   },
   methods: {
     handleSelectionChange(val) {
@@ -111,8 +116,40 @@ export default {
     Haddclass(path) {
       this.$router.push(path);
     },
-    Haddtype(path,id) {
-      this.$router.push({path,query:{id:id}})
+    Haddtype(path, id) {
+      this.$router.push({ path, query: { id: id } });
+    },
+    //删除单个
+    async removeOne(id) {
+      let {
+        data: { data }
+      } = await this.$axios.delete("http://127.0.0.1:1901/hrl/classremove", {
+        params: {
+          _id: id
+        }
+      });
+      let datatype = await this.$axios.get(
+        "http://127.0.0.1:1901/hrl/classtype"
+      );
+      this.tableData = datatype.data.data;
+    },
+    //删除所勾选的
+    async removemore(visible) {
+      this.visible = false;
+      console.log(this.multipleSelection);
+      for (let i = 0; i < this.multipleSelection.length; i++) {
+        let {
+          data: { data }
+        } = await this.$axios.delete("http://127.0.0.1:1901/hrl/classremoves", {
+          params: {
+            _id: this.multipleSelection[i]._id
+          }
+        });
+      }
+      let datatypes = await this.$axios.get(
+        "http://127.0.0.1:1901/hrl/classtype"
+      );
+      this.tableData = datatypes.data.data;
     }
   }
 };

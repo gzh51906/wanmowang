@@ -1,12 +1,12 @@
 <template>
   <div>
-
+    
     <el-table
       ref="multipleTable"
       :data="pageData"
       tooltip-effect="dark"
       style="width: 100%"
-      :default-sort = "{prop: 'price', order: 'descending'}"
+      :default-sort = "{prop: ['price','num'], order: 'descending'}"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column prop="desc" label="商品" width="120" show-overflow-tooltip></el-table-column>
       <el-table-column prop="price" label="单价" sortable></el-table-column>
-      <el-table-column prop="num" label="数量"></el-table-column>
+      <el-table-column prop="num" label="数量" sortable></el-table-column>
       <el-table-column label="运费">
         <template>{{ 0 }}</template>
       </el-table-column>
@@ -40,16 +40,16 @@
       </el-table-column>
     </el-table>
     <div style="margin-top: 20px">
-      <el-button @click="toggleSelection([pageData[1], pageData[2]])">切换第二、第三行的选中状态</el-button>
       <el-button @click="toggleSelection()">取消选择</el-button>
     </div>
     <div class="block">
-      <span class="demonstration">直接前往</span>
+      <span class="demonstration">页码</span>
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page.sync="currentPage3"
         :page-size="4"
+         background
         layout="prev, pager, next, jumper"
         :total="tableData.length"
       ></el-pagination>

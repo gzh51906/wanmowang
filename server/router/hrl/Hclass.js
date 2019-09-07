@@ -76,7 +76,6 @@ Router.patch("/classnew", async (req, res, next) => {
         num,
         _id
     } = req.body;
-    console.log(_id)
     let data = await update('type', {
         _id: _id
     }, {
@@ -85,6 +84,34 @@ Router.patch("/classnew", async (req, res, next) => {
             time: time,
             num: num
         }
+    });
+    res.send(formatData({
+        data: data
+    }));
+    next();
+});
+
+//删除某个商品类型
+Router.delete("/classremove", async (req, res, next) => {
+    let {
+        _id
+    } = req.query;
+    let data = await remove('type', {
+        _id: _id
+    });
+    res.send(formatData({
+        data: data
+    }));
+    next();
+})
+
+//删除多个商品类型
+Router.delete("/classremoves", async (req, res, next) => {
+    let {
+        _id
+    } = req.query;
+    let data = await remove('type', {
+        _id: _id
     });
     res.send(formatData({
         data: data
