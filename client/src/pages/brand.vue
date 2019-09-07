@@ -7,7 +7,7 @@
       <div class="brandbox">
         <div class="brandboxNav">
           <h2 @click="gotoAll('allgoods','ZOEAT棉花糖')">
-			ZOEAT棉花糖 / Marshmallow
+            ZOEAT棉花糖 / Marshmallow
             <i class="el-icon-arrow-right"></i>
           </h2>
         </div>
@@ -38,7 +38,7 @@ export default {
     };
   },
   async created() {
-    let phoneData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let phoneData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "ZOEAT棉花糖"
       }
@@ -50,8 +50,8 @@ export default {
     Hgoto(goods_id, path) {
       this.$router.push({ path, query: { goods_id } });
     },
-    gotoAll(path,type){
-       this.$router.push({path,query:{type}})
+    gotoAll(path, type) {
+      this.$router.push({ path, query: { type } });
     }
   }
 };

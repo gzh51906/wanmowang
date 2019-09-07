@@ -33,11 +33,14 @@ export default {
     };
   },
   async beforeMount() {
-    let result = await this.$axios.get("http://127.0.0.1:1901/crx/readOrder", {
-      params: {
-        username: this.$store.state.common.username
+    let result = await this.$axios.get(
+      "http://49.232.25.17:1901/crx/readOrder",
+      {
+        params: {
+          username: this.$store.state.common.username
+        }
       }
-    });
+    );
     this.data = result.data.data;
     this.type = true;
   },

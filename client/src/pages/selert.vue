@@ -1,187 +1,197 @@
 <template>
-    <div>
-         <div class="block" width="100%">
-        <el-carousel height="170px">
-          <el-carousel-item v-for="item in bannerimg" :key="item">
-            <img :src="item" width="100%"/>
-          </el-carousel-item>
-        </el-carousel>
+  <div>
+    <div class="block" width="100%">
+      <el-carousel height="170px">
+        <el-carousel-item v-for="item in bannerimg" :key="item">
+          <img :src="item" width="100%" />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="hauthor">
+      <div class="hauthor-nav">
+        <h4>
+          精选设置商店
+          <p>SELECTED STORE</p>
+        </h4>
       </div>
-      <div class="hauthor">
-        <div class="hauthor-nav">
-          <h4>
-            精选设置商店
-            <p>SELECTED STORE</p>
-          </h4>
-        </div>
-        <div>
-          <ul class="authorList">
-            <li v-for="item in hAuthor" :key="item._id">
-              <div>
-                <el-avatar :size="78" :src="item.data.result.designer.thumb"></el-avatar>
-                <p>{{item.data.result.designer.nick}}</p>
-                <i class="el-icon-circle-plus icon"></i>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="hotGoods">
-        <div class="hotGoodsBox">
-          <img src="./img/hot.png" width="100%"/>
-          <ul class="hotGoodsList">
-            <li v-for="item in hHotgoods" :key="item._id">
-              <div>
-                <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="130px" height="130px" />
-                <p class="hcont">{{item.data.result.title}}</p>
-                <p class="hprice">{{'￥' + item.data.result.price}}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="newGoods">
-        <div class="newGoodsBox">
-          <img src="./img/new.png" width="100%" />
-          <ul class="newGoodsList">
-            <li v-for="item in hNewgoods" :key="item._id">
-              <div>
-                <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="130px" height="130px" />
-                <p class="hcont">{{item.data.result.title}}</p>
-                <p class="hprice">{{'￥' + item.data.result.price}}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="clothGoods">
-        <h2>
-          服饰
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="clothGoodsBox">
-          <ul class="clothGoodsList">
-            <li v-for="item in hClothgoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="DPGoods">
-        <h2>
-          搭配
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="DPGoodsBox">
-          <ul class="DPGoodsList">
-            <li v-for="item in hDPgoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="digital">
-        <h2>
-          数码
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="digitalBox">
-          <ul class="digitalList">
-            <li v-for="item in hDigitalgoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="kitchen">
-        <h2>
-          餐厨
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="kitchenBox">
-          <ul class="kitchenList">
-            <li v-for="item in hKitchengoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="trip">
-        <h2>
-          出行
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="tripBox">
-          <ul class="tripList">
-            <li v-for="item in htripgoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="stationery">
-        <h2>
-          文具
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="stationeryBox">
-          <ul class="stationeryList">
-            <li v-for="item in hStationerygoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="live">
-        <h2>
-          居家
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="liveBox">
-          <ul class="liveList">
-            <li v-for="item in hLivegoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="brand">
-        <h2>
-          品牌
-          <i class="el-icon-caret-right"></i>
-        </h2>
-        <div class="brandBox">
-          <ul class="brandList">
-            <li v-for="item in hbrandgoods" :key="item._id">
-              <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
-              <p class="hcont">{{item.data.result.title}}</p>
-              <p class="price">{{'￥' + item.data.result.price}}</p>
-            </li>
-          </ul>
-        </div>
+      <div>
+        <ul class="authorList">
+          <li v-for="item in hAuthor" :key="item._id">
+            <div>
+              <el-avatar :size="78" :src="item.data.result.designer.thumb"></el-avatar>
+              <p>{{item.data.result.designer.nick}}</p>
+              <i class="el-icon-circle-plus icon"></i>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="hotGoods">
+      <div class="hotGoodsBox">
+        <img src="./img/hot.png" width="100%" />
+        <ul class="hotGoodsList">
+          <li v-for="item in hHotgoods" :key="item._id">
+            <div>
+              <img
+                @click="hGoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="130px"
+                height="130px"
+              />
+              <p class="hcont">{{item.data.result.title}}</p>
+              <p class="hprice">{{'￥' + item.data.result.price}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="newGoods">
+      <div class="newGoodsBox">
+        <img src="./img/new.png" width="100%" />
+        <ul class="newGoodsList">
+          <li v-for="item in hNewgoods" :key="item._id">
+            <div>
+              <img
+                @click="hGoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="130px"
+                height="130px"
+              />
+              <p class="hcont">{{item.data.result.title}}</p>
+              <p class="hprice">{{'￥' + item.data.result.price}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="clothGoods">
+      <h2>
+        服饰
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="clothGoodsBox">
+        <ul class="clothGoodsList">
+          <li v-for="item in hClothgoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="DPGoods">
+      <h2>
+        搭配
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="DPGoodsBox">
+        <ul class="DPGoodsList">
+          <li v-for="item in hDPgoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="digital">
+      <h2>
+        数码
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="digitalBox">
+        <ul class="digitalList">
+          <li v-for="item in hDigitalgoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="kitchen">
+      <h2>
+        餐厨
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="kitchenBox">
+        <ul class="kitchenList">
+          <li v-for="item in hKitchengoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="trip">
+      <h2>
+        出行
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="tripBox">
+        <ul class="tripList">
+          <li v-for="item in htripgoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="stationery">
+      <h2>
+        文具
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="stationeryBox">
+        <ul class="stationeryList">
+          <li v-for="item in hStationerygoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="live">
+      <h2>
+        居家
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="liveBox">
+        <ul class="liveList">
+          <li v-for="item in hLivegoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="brand">
+      <h2>
+        品牌
+        <i class="el-icon-caret-right"></i>
+      </h2>
+      <div class="brandBox">
+        <ul class="brandList">
+          <li v-for="item in hbrandgoods" :key="item._id">
+            <img @click="hGoto(item._id,'more')" :src="item.data.result.picture" width="100%" />
+            <p class="hcont">{{item.data.result.title}}</p>
+            <p class="price">{{'￥' + item.data.result.price}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-        bannerimg: [
+  data() {
+    return {
+      bannerimg: [
         "http://cdn.inklego.com/picture/banner/20190114/b5f154a7be5efb76e2154c81a952a2a6.png?x-oss-process=image/resize,w_500",
         "http://cdn.inklego.com/picture/banner/20180403/dca575d46f495eea73c65819123aff9a.png?x-oss-process=image/resize,w_500",
         "http://cdn.inklego.com/picture/banner/20190228/cc65b511cf72f9154d6c3fab03c30186.jpg?x-oss-process=image/resize,w_500",
@@ -199,51 +209,54 @@ export default {
       hStationerygoods: [],
       hLivegoods: [],
       hbrandgoods: []
-        }
-    },
-     //发送请求
+    };
+  },
+  //发送请求
   async created() {
     // console.log(this.$route)
     // let goods_id = this.$route.query.goods_id
-    let { data } = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let { data } = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "联名潮牌"
       }
     });
-    let phoneData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let phoneData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "手机壳"
       }
     });
-    let dapeiData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let dapeiData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "帆布包"
       }
     });
-    let kitchenData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
-      params: {
-        title: "马克杯"
+    let kitchenData = await this.$axios.get(
+      "http://49.232.25.17:1901/hrl/home",
+      {
+        params: {
+          title: "马克杯"
+        }
       }
-    });
-    let tripData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    );
+    let tripData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "滑板"
       }
     });
     let stationeryData = await this.$axios.get(
-      "http://127.0.0.1:1901/hrl/home",
+      "http://49.232.25.17:1901/hrl/home",
       {
         params: {
           title: "精装本"
         }
       }
     );
-    let liveData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let liveData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "方帆布画"
       }
     });
-    let brandData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let brandData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "ZOEAT棉花糖"
       }
@@ -261,17 +274,19 @@ export default {
     this.hbrandgoods = brandData.data.data.slice(1, 6);
     // this.active = this.$router.path;
   },
-  methods:{
-    hGoto(goods_id,path){
-      this.$router.push({path,query:{goods_id}})
+  methods: {
+    hGoto(goods_id, path) {
+      this.$router.push({ path, query: { goods_id } });
     }
   }
-}
+};
 </script>
 
 <style scoped>
-*{list-style: none;}
-.icon{
+* {
+  list-style: none;
+}
+.icon {
   font-size: 40px;
 }
 .el-main .hauthor {

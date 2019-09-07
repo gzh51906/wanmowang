@@ -15,7 +15,13 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in clothGoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" class="" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                class
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
@@ -23,7 +29,7 @@
     </div>
     <div class="clothBody">
       <div class="clothbox">
-          <div class="boderTop"></div>
+        <div class="boderTop"></div>
         <div class="clothboxNav">
           <h2 @click="gotoAll('allgoods','联名潮牌')">
             卫衣
@@ -33,7 +39,12 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in weiyigoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
@@ -41,7 +52,7 @@
     </div>
     <div class="clothBody">
       <div class="clothbox">
-          <div class="boderTop"></div>
+        <div class="boderTop"></div>
         <div class="clothboxNav">
           <h2 @click="gotoAll('allgoods','联名潮牌')">
             联名潮牌/vest
@@ -51,7 +62,12 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in lmcpgoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
@@ -65,14 +81,14 @@ export default {
   data() {
     return {
       clothGoods: [],
-      weiyigoods:[],
-      lmcpgoods:[],
+      weiyigoods: [],
+      lmcpgoods: [],
       bigImg: "",
       type: ""
     };
   },
   async created() {
-    let clothData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let clothData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "联名潮牌"
       }
@@ -80,15 +96,15 @@ export default {
     this.bigImg = clothData.data.data[0].bigImg;
     this.clothGoods = clothData.data.data.slice(5, 8);
     this.weiyigoods = clothData.data.data.slice(21);
-    this.lmcpgoods = clothData.data.data.slice(19,22);
+    this.lmcpgoods = clothData.data.data.slice(19, 22);
     this.type = clothData.data.data[0].type.slice(1);
   },
-  methods:{
-    Hgoto(goods_id,path){
-      this.$router.push({path,query:{goods_id}})
+  methods: {
+    Hgoto(goods_id, path) {
+      this.$router.push({ path, query: { goods_id } });
     },
-    gotoAll(path,type){
-       this.$router.push({path,query:{type}})
+    gotoAll(path, type) {
+      this.$router.push({ path, query: { type } });
     }
   }
 };
@@ -102,12 +118,12 @@ export default {
   width: 100%;
   height: 210px;
 }
-.clothBody .boderTop{
-    border-top:20px solid rgba(200, 200, 200, 0.3);
-    width: 100%;
+.clothBody .boderTop {
+  border-top: 20px solid rgba(200, 200, 200, 0.3);
+  width: 100%;
 }
-.clothBody .clothbox .clothboxNav{
-    width: 100%;
+.clothBody .clothbox .clothboxNav {
+  width: 100%;
 }
 .clothBody .clothbox .clothboxNav h2 {
   font-size: 14px;
@@ -127,7 +143,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-.clothBody .clothbox .imgbox .imglist li{
-    padding: 10px;
+.clothBody .clothbox .imgbox .imglist li {
+  padding: 10px;
 }
 </style>

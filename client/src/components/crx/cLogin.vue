@@ -61,7 +61,7 @@ export default {
         if (valid) {
           let { pass: password, cEmail: email } = this.ruleForm;
           let result = await this.$axios.get(
-            "http://127.0.0.1:1901/crx/login",
+            "http://49.232.25.17:1901/crx/login",
             {
               params: {
                 email,

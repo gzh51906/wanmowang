@@ -54,7 +54,7 @@ export default {
   },
   async beforeMount() {
     let result = await this.$axios.get(
-      "http://127.0.0.1:1901/crx/manage_userManage",
+      "http://49.232.25.17:1901/crx/manage_userManage",
       {
         params: {
           _id: this.$route.query._id
@@ -77,7 +77,7 @@ export default {
         alert("密码为必填项");
       } else {
         let result = await this.$axios.patch(
-          "http://127.0.0.1:1901/crx/manage_patchManage",
+          "http://49.232.25.17:1901/crx/manage_patchManage",
           {
             _id: this.$route.query._id,
             data: this.form

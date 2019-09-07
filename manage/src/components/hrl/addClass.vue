@@ -47,7 +47,7 @@ export default {
         });
         let {
           data: { data }
-        } = await this.$axios.patch("http://127.0.0.1:1901/hrl/classtype", {
+        } = await this.$axios.patch("http://49.232.25.17:1901/hrl/classtype", {
           num: this.form.desc,
           name: this.form.name,
           time: this.form.date1

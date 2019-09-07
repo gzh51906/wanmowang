@@ -45,7 +45,11 @@
       </el-select>
       <p class="p1">{{data.data.result.color.title}}</p>
       <el-select v-model="value2" placeholder="请选择">
-        <el-option v-for="item in data.data.result.color.content" :key="item.rank" :value="item.val"></el-option>
+        <el-option
+          v-for="item in data.data.result.color.content"
+          :key="item.rank"
+          :value="item.val"
+        ></el-option>
       </el-select>
       <p class="p1">数量</p>
       <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
@@ -73,7 +77,7 @@ export default {
   async beforeMount() {
     this.cTargetUrl = this.$route.query.targetUrl || "/home";
     let goods_id = this.$route.query.goods_id || "5d6b4911d41ac71e7007316d";
-    let data = await this.$axios.get("http://127.0.0.1:1901/crx/goods", {
+    let data = await this.$axios.get("http://49.232.25.17:1901/crx/goods", {
       params: {
         goods_id
       }
@@ -106,16 +110,19 @@ export default {
           let price = this.data.data.result.price;
           let desc = this.data.data.result.title;
           let username = this.$store.state.common.username;
-          let result = await this.$axios.post("http://127.0.0.1:1901/crx/add", {
-            goods_id,
-            type1,
-            type2,
-            num,
-            imgUrl,
-            price,
-            desc,
-            username
-          });
+          let result = await this.$axios.post(
+            "http://49.232.25.17:1901/crx/add",
+            {
+              goods_id,
+              type1,
+              type2,
+              num,
+              imgUrl,
+              price,
+              desc,
+              username
+            }
+          );
           alert(result.data);
           this.drawer = false;
           if (other) {

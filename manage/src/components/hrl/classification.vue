@@ -84,7 +84,7 @@ export default {
   async created() {
     let {
       data: { data }
-    } = await this.$axios.get("http://127.0.0.1:1901/hrl/classtype");
+    } = await this.$axios.get("http://49.232.25.17:1901/hrl/classtype");
     this.tableData = data;
   },
   methods: {
@@ -94,7 +94,7 @@ export default {
     async handleCommand(command) {
       let {
         data: { data }
-      } = await this.$axios.get("http://127.0.0.1:1901/hrl/classnum", {
+      } = await this.$axios.get("http://49.232.25.17:1901/hrl/classnum", {
         params: {
           title: command
         }
@@ -105,7 +105,7 @@ export default {
       // console.log(type);
       let {
         data: { data }
-      } = await this.$axios.get("http://127.0.0.1:1901/hrl/class", {
+      } = await this.$axios.get("http://49.232.25.17:1901/hrl/class", {
         params: {
           type: type
         }
@@ -132,13 +132,16 @@ export default {
       if (this.$store.state.common.delete) {
         let {
           data: { data }
-        } = await this.$axios.delete("http://127.0.0.1:1901/hrl/classremove", {
-          params: {
-            _id: id
+        } = await this.$axios.delete(
+          "http://49.232.25.17:1901/hrl/classremove",
+          {
+            params: {
+              _id: id
+            }
           }
-        });
+        );
         let datatype = await this.$axios.get(
-          "http://127.0.0.1:1901/hrl/classtype"
+          "http://49.232.25.17:1901/hrl/classtype"
         );
         this.tableData = datatype.data.data;
       } else {
@@ -153,7 +156,7 @@ export default {
           let {
             data: { data }
           } = await this.$axios.delete(
-            "http://127.0.0.1:1901/hrl/classremoves",
+            "http://49.232.25.17:1901/hrl/classremoves",
             {
               params: {
                 _id: this.multipleSelection[i]._id
@@ -162,7 +165,7 @@ export default {
           );
         }
         let datatypes = await this.$axios.get(
-          "http://127.0.0.1:1901/hrl/classtype"
+          "http://49.232.25.17:1901/hrl/classtype"
         );
         this.tableData = datatypes.data.data;
       } else {

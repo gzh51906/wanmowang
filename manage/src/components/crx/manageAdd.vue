@@ -59,7 +59,7 @@ export default {
         alert("密码为必填项");
       } else {
         let result = await this.$axios.post(
-          "http://127.0.0.1:1901/crx/manage_manageAdd",
+          "http://49.232.25.17:1901/crx/manage_manageAdd",
           {
             data: this.form
           }

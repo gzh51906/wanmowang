@@ -32,25 +32,25 @@ export default {
       }
     };
   },
-   methods: {
+  methods: {
     async onSubmit(path) {
-      let id = this.$route.query.id
+      let id = this.$route.query.id;
       if (this.form.name === "") {
         alert("商品类型不能为空");
       } else if (this.form.desc === "") {
         alert("数量不能为空");
-      } else if(this.form.date1 === ''){
+      } else if (this.form.date1 === "") {
         alert("时间不能为空");
-      }else{
+      } else {
         console.log(this.$route.query);
         this.$router.push(path);
         let {
           data: { data }
-        } = await this.$axios.patch("http://127.0.0.1:1901/hrl/classnew", {
+        } = await this.$axios.patch("http://49.232.25.17:1901/hrl/classnew", {
           num: this.form.desc,
           name: this.form.name,
           time: this.form.date1,
-          _id:id
+          _id: id
         });
       }
     },

@@ -65,34 +65,40 @@ export default {
     goback(path) {
       this.$router.push(path);
     },
-    async upPrice(num){
-        let type = this.$route.query.type;
-        console.log(num);
-        let {data} = await this.$axios.get("http://127.0.0.1:1901/hrl/allgoods",{
-            params:{
-                title:type,
-                asc:num
-            }
-        });
-        this.allgoods = data.data;
-        this.comgoods = this.allgoods.slice(1, 7);
+    async upPrice(num) {
+      let type = this.$route.query.type;
+      console.log(num);
+      let { data } = await this.$axios.get(
+        "http://49.232.25.17:1901/hrl/allgoods",
+        {
+          params: {
+            title: type,
+            asc: num
+          }
+        }
+      );
+      this.allgoods = data.data;
+      this.comgoods = this.allgoods.slice(1, 7);
     },
-    async downPrice(num){
-        let type = this.$route.query.type;
-        console.log(num);
-        let {data} = await this.$axios.get("http://127.0.0.1:1901/hrl/allgoods",{
-            params:{
-                title:type,
-                asc:num
-            }
-        });
-        this.allgoods = data.data;
-        this.comgoods = this.allgoods.slice(1, 7);
+    async downPrice(num) {
+      let type = this.$route.query.type;
+      console.log(num);
+      let { data } = await this.$axios.get(
+        "http://49.232.25.17:1901/hrl/allgoods",
+        {
+          params: {
+            title: type,
+            asc: num
+          }
+        }
+      );
+      this.allgoods = data.data;
+      this.comgoods = this.allgoods.slice(1, 7);
     }
   },
   async created() {
     let type = this.$route.query.type;
-    let { data } = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let { data } = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: type
       }

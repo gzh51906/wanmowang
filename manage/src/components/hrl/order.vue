@@ -69,7 +69,7 @@ export default {
   async created() {
     let {
       data: { data }
-    } = await this.$axios.get("http://127.0.0.1:1901/hrl/order");
+    } = await this.$axios.get("http://49.232.25.17:1901/hrl/order");
     this.tableData = data;
     this.pageData = data.slice(0, 4);
   },
@@ -90,13 +90,15 @@ export default {
       if (this.$store.state.common.delete) {
         let {
           data: { data }
-        } = await this.$axios.delete("http://127.0.0.1:1901/hrl/order", {
+        } = await this.$axios.delete("http://49.232.25.17:1901/hrl/order", {
           params: {
             goods_id: goods_id
           }
         });
 
-        let newData = await this.$axios.get("http://127.0.0.1:1901/hrl/order");
+        let newData = await this.$axios.get(
+          "http://49.232.25.17:1901/hrl/order"
+        );
         this.tableData = newData.data.data;
         this.pageData = newData.data.data.slice(0, 4);
       } else {
@@ -113,7 +115,7 @@ export default {
         }
         let {
           data: { data }
-        } = await this.$axios.patch("http://127.0.0.1:1901/hrl/order", {
+        } = await this.$axios.patch("http://49.232.25.17:1901/hrl/order", {
           _id: id
         });
       } else {
