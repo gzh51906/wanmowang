@@ -49,7 +49,7 @@ export default {
   },
   async beforeMount() {
     let result = await this.$axios.get(
-      "http://127.0.0.1:1901/crx/manage_userManage"
+      "http://49.232.25.17:1901/crx/manage_userManage"
     );
     this.$store.commit("manageData", result.data.data);
     this.data = this.$store.state.manage.data.slice(0, 8);
@@ -75,7 +75,7 @@ export default {
       }
       this.pageChange();
       let result = await this.$axios.delete(
-        "http://127.0.0.1:1901/crx/manage_removeManage",
+        "http://49.232.25.17:1901/crx/manage_removeManage",
         {
           params: {
             _id: val._id

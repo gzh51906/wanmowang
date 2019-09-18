@@ -207,46 +207,55 @@ export default {
     };
   },
   async created() {
-    let mouseData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let mouseData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "方抱枕"
       }
     });
-    let canvasData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
-      params: {
-        title: "圆抱枕"
+    let canvasData = await this.$axios.get(
+      "http://49.232.25.17:1901/hrl/home",
+      {
+        params: {
+          title: "圆抱枕"
+        }
       }
-    });
-    let badgeData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    );
+    let badgeData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "挂钟"
       }
     });
-    let truckerData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
-      params: {
-        title: "方帆布画"
+    let truckerData = await this.$axios.get(
+      "http://49.232.25.17:1901/hrl/home",
+      {
+        params: {
+          title: "方帆布画"
+        }
       }
-    });
-    let eyeData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    );
+    let eyeData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "矩帆布画"
       }
     });
-    let mouthData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let mouthData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "毛毯"
       }
     });
-    let capData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let capData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "毛巾"
       }
     });
-    let cmirrorData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
-      params: {
-        title: "懒人沙发"
+    let cmirrorData = await this.$axios.get(
+      "http://49.232.25.17:1901/hrl/home",
+      {
+        params: {
+          title: "懒人沙发"
+        }
       }
-    });
+    );
     this.bigImg = mouseData.data.data[0].bigImg;
     this.liveGoods = mouseData.data.data.slice(1, 4);
     this.canvasgoods = canvasData.data.data.slice(1, 4);

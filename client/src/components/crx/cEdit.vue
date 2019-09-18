@@ -34,7 +34,7 @@ export default {
   },
   async beforeMount() {
     let username = this.$store.state.common.username;
-    let data = await this.$axios.get("http://127.0.0.1:1901/crx/read", {
+    let data = await this.$axios.get("http://49.232.25.17:1901/crx/read", {
       params: {
         username
       }
@@ -69,7 +69,7 @@ export default {
       if (this.selected.length !== 0) {
         for (let i = 0; i < this.selected.length; i++) {
           let result = await this.$axios.delete(
-            "http://127.0.0.1:1901/crx/remove",
+            "http://49.232.25.17:1901/crx/remove",
             {
               params: { selected: this.selected[i] }
             }

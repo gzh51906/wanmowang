@@ -59,7 +59,7 @@ export default {
   async created() {
     let { data } = await this.$axios({
       methods: "get",
-      url: "http://127.0.0.1:1901/spl/account",
+      url: "http://49.232.25.17:1901/spl/account",
       params: { username: this.$store.state.common.username }
     });
     this.data = data;

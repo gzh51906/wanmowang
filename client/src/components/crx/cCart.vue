@@ -39,7 +39,7 @@ export default {
   },
   async beforeMount() {
     let username = this.$store.state.common.username;
-    let data = await this.$axios.get("http://127.0.0.1:1901/crx/read", {
+    let data = await this.$axios.get("http://49.232.25.17:1901/crx/read", {
       params: {
         username
       }
@@ -63,11 +63,11 @@ export default {
         };
       });
       let result1 = await this.$axios.post(
-        "http://127.0.0.1:1901/crx/insertOrder",
+        "http://49.232.25.17:1901/crx/insertOrder",
         { data: order }
       );
       let result2 = await this.$axios.delete(
-        "http://127.0.0.1:1901/crx/removeOrder",
+        "http://49.232.25.17:1901/crx/removeOrder",
         {
           params: {
             username: this.$store.state.common.username
@@ -77,7 +77,8 @@ export default {
       this.$router.push("/order");
     },
     back() {
-      this.$router.push(this.$route.query.targetUrl);
+      let targetUrl = this.$route.query.targetUrl || "/home";
+      this.$router.push(targetUrl);
     },
     allPrice() {
       return this.data

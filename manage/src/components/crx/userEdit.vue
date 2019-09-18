@@ -45,7 +45,7 @@ export default {
   },
   async beforeMount() {
     let data = await this.$axios.get(
-      "http://127.0.0.1:1901/crx/manage_userEditRead",
+      "http://49.232.25.17:1901/crx/manage_userEditRead",
       {
         params: {
           _id: this.$route.query.id
@@ -63,7 +63,7 @@ export default {
   methods: {
     async submit() {
       let result = await this.$axios.patch(
-        "http://127.0.0.1:1901/crx/manage_userEditPatch",
+        "http://49.232.25.17:1901/crx/manage_userEditPatch",
         {
           _id: this.$route.query.id,
           data: this.form

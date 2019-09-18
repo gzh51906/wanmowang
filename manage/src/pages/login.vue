@@ -60,7 +60,7 @@ export default {
         if (valid) {
           let { data } = await this.$axios({
             methods: "get",
-            url: "http://127.0.0.1:1901/spl/login",
+            url: "http://49.232.25.17:1901/spl/login",
             params: {
               username: this.ruleForm.name,
               password: this.ruleForm.pass

@@ -63,12 +63,12 @@ export default {
     };
   },
   async created() {
-    let phoneData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let phoneData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "马克杯"
       }
     });
-    let spoonData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let spoonData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "插勺杯"
       }

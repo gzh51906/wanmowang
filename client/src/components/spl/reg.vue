@@ -73,11 +73,14 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async valid => {
         if (valid) {
-          let type = await this.$axios.post("http://127.0.0.1:1901/crx/reg", {
-            email: this.ruleForm.cEmail,
-            username: this.ruleForm.cUsername,
-            password: this.ruleForm.pass
-          });
+          let type = await this.$axios.post(
+            "http://49.232.25.17:1901/crx/reg",
+            {
+              email: this.ruleForm.cEmail,
+              username: this.ruleForm.cUsername,
+              password: this.ruleForm.pass
+            }
+          );
           if (type.data.code) {
             this.$router.push("/login");
           } else {

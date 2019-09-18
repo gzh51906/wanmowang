@@ -46,6 +46,7 @@ let router = new VueRouter({
     /** 
      * 不方便注释的地方在这里注释
      */
+    mode: "history",
     routes: [{
         name: "goodlist",
         path: "/goodlist",
@@ -72,14 +73,14 @@ let router = new VueRouter({
         path: '/class',
         component: Classification
     }, {
-        name:'addclass',
-        path:"/addclass",
+        name: 'addclass',
+        path: "/addclass",
         component: Addclass
-    },{
-        name:'addtype',
-        path:'/addtype',
+    }, {
+        name: 'addtype',
+        path: '/addtype',
         component: Addtype
-    },{
+    }, {
         name: 'userAdd',
         path: '/userAdd',
         component: userAdd
@@ -119,7 +120,7 @@ import axios from 'axios';
 import store from "../store";
 router.beforeEach(async (to, from, next) => {
     store.commit("update");
-    let result = await axios.get("http://127.0.0.1:1901/crx/manage_userManage", {
+    let result = await axios.get("http://49.232.25.17:1901/crx/manage_userManage", {
         params: {
             username: localStorage.getItem("userCheck")
         }

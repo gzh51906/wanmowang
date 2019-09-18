@@ -1,5 +1,5 @@
 <template>
-  <img src="../spl/image/login_reg_bg.png" alt />
+  <img src="../spl/image/huge.jpg" alt />
 </template>
 <script>
 export default {};

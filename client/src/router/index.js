@@ -55,6 +55,7 @@ let router = new VueRouter({
      * 不方便注释的地方在这里注释
      * 陈日兴引入cMore
      */
+    mode: "history",
     routes: [{
         name: 'home',
         path: '/home',
@@ -96,10 +97,10 @@ let router = new VueRouter({
         name: 'trip',
         path: '/trip',
         component: Trip
-    },{
-        name:"allgoods",
-        path:'/allgoods',
-        component:Allgoods
+    }, {
+        name: "allgoods",
+        path: '/allgoods',
+        component: Allgoods
     }, {
         name: mine,
         path: "/mine",
@@ -170,7 +171,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.matched.some(item => item.meta.authorCheck)) {
         let authorCheck = localStorage.getItem("authorCheck");
         if (authorCheck) {
-            let type = await axios.get("http://127.0.0.1:1901/crx/verify", {
+            let type = await axios.get("http://49.232.25.17:1901/crx/verify", {
                 headers: {
                     authorCheck
                 }

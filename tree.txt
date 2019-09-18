@@ -1,0 +1,123 @@
+team_vueproject/
+├── client/
+│   ├── babel.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   └── index.html
+│   ├── README.md
+│   └── src/
+│       ├── App.vue
+│       ├── assets/
+│       │   └── logo.png
+│       ├── components/
+│       │   ├── crx/
+│       │   │   ├── cCart.vue
+│       │   │   ├── cEdit.vue
+│       │   │   ├── cLogin.vue
+│       │   │   ├── cMore.vue
+│       │   │   └── cOrder.vue
+│       │   └── spl/
+│       │       ├── account.vue
+│       │       ├── designer.vue
+│       │       ├── image/
+│       │       ├── mine.vue
+│       │       ├── presale.vue
+│       │       ├── reg.vue
+│       │       ├── server.vue
+│       │       └── set.vue
+│       ├── main.js
+│       ├── pages/
+│       │   ├── allgoods.vue
+│       │   ├── brand.vue
+│       │   ├── cloth.vue
+│       │   ├── collocation.vue
+│       │   ├── digital.vue
+│       │   ├── home.vue
+│       │   ├── kitchen.vue
+│       │   ├── live.vue
+│       │   ├── selert.vue
+│       │   ├── stationery.vue
+│       │   └── trip.vue
+│       ├── router/
+│       │   └── index.js
+│       └── store/
+│           ├── common.js
+│           └── index.js
+├── manage/
+│   ├── babel.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   └── index.html
+│   ├── README.md
+│   └── src/
+│       ├── App.vue
+│       ├── assets/
+│       │   └── logo.png
+│       ├── components/
+│       │   ├── crx/
+│       │   │   ├── common.vue
+│       │   │   ├── ignore.txt
+│       │   │   ├── manageAdd.vue
+│       │   │   ├── manageEdit.vue
+│       │   │   ├── userAdd.vue
+│       │   │   ├── userEdit.vue
+│       │   │   ├── userList.vue
+│       │   │   └── userManage.vue
+│       │   ├── hrl/
+│       │   │   ├── addClass.vue
+│       │   │   ├── addType.vue
+│       │   │   ├── classification.vue
+│       │   │   ├── ignore.txt
+│       │   │   └── order.vue
+│       │   └── spl/
+│       │       ├── editor.vue
+│       │       ├── goodlist.vue
+│       │       ├── ignore.txt
+│       │       └── image/
+│       ├── main.js
+│       ├── pages/
+│       │   ├── home.vue
+│       │   ├── ignore.txt
+│       │   └── login.vue
+│       ├── router/
+│       │   └── index.js
+│       └── store/
+│           ├── common.js
+│           ├── index.js
+│           ├── Lgoodsdata.js
+│           ├── manage.js
+│           └── userlist.js
+├── README.md
+├── server/
+│   ├── config.json
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── router/
+│   │   ├── common/
+│   │   │   ├── formatData.js
+│   │   │   ├── mongo.js
+│   │   │   └── token.js
+│   │   ├── crx/
+│   │   │   ├── cMore.js
+│   │   │   ├── cOrder.js
+│   │   │   ├── cRegister.js
+│   │   │   └── manage_user.js
+│   │   ├── hrl/
+│   │   │   ├── Hclass.js
+│   │   │   ├── hHome.js
+│   │   │   ├── hlistpage.js
+│   │   │   ├── Horder.js
+│   │   │   └── ignore.txt
+│   │   ├── index.js
+│   │   └── spl/
+│   │       ├── ignore.txt
+│   │       ├── Lcheck.js
+│   │       ├── Ldes.js
+│   │       ├── Lfind.js
+│   │       └── Lgoodlist.js
+│   └── server.js
+└── tree.txt

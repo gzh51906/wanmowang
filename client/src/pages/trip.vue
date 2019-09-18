@@ -1,5 +1,5 @@
 <template>
-    <div class="trip">
+  <div class="trip">
     <div class="tripNav">
       <img :src="bigImg" width="100%" />
     </div>
@@ -7,7 +7,7 @@
       <div class="tripbox">
         <div class="tripboxNav">
           <h2 @click="gotoAll('allgoods','滑板')">
-			滑板 / Skateboard
+            滑板 / Skateboard
             <i class="el-icon-arrow-right"></i>
           </h2>
         </div>
@@ -15,7 +15,13 @@
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in tripGoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" class="" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                class
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
@@ -23,53 +29,68 @@
     </div>
     <div class="tripBody">
       <div class="tripbox">
-          <div class="boderTop"></div>
+        <div class="boderTop"></div>
         <div class="tripboxNav">
           <h2 @click="gotoAll('allgoods','沙滩巾')">
-			沙滩巾 / Beach Towel
+            沙滩巾 / Beach Towel
             <i class="el-icon-arrow-right"></i>
           </h2>
         </div>
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in beachgoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
       </div>
     </div>
-     <div class="tripBody">
+    <div class="tripBody">
       <div class="tripbox">
-          <div class="boderTop"></div>
+        <div class="boderTop"></div>
         <div class="tripboxNav">
           <h2 @click="gotoAll('allgoods','雨伞')">
-			雨伞 / Umbrella
+            雨伞 / Umbrella
             <i class="el-icon-arrow-right"></i>
           </h2>
         </div>
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in umbrellagoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
       </div>
     </div>
-     <div class="tripBody">
+    <div class="tripBody">
       <div class="tripbox">
-          <div class="boderTop"></div>
+        <div class="boderTop"></div>
         <div class="tripboxNav">
           <h2 @click="gotoAll('allgoods','旅行箱')">
-			旅行箱 / Suitcase
+            旅行箱 / Suitcase
             <i class="el-icon-arrow-right"></i>
           </h2>
         </div>
         <div class="imgbox">
           <ul class="imglist">
             <li v-for="item in suitcasegoods" :key="item._id">
-              <img @click="Hgoto(item._id,'more')" :src="item.data.result.picture" width="105px" height="105px" />
+              <img
+                @click="Hgoto(item._id,'more')"
+                :src="item.data.result.picture"
+                width="105px"
+                height="105px"
+              />
             </li>
           </ul>
         </div>
@@ -83,45 +104,51 @@ export default {
   data() {
     return {
       tripGoods: [],
-      beachgoods:[],
-      umbrellagoods:[],
-      suitcasegoods:[],
-      bigImg: "",
+      beachgoods: [],
+      umbrellagoods: [],
+      suitcasegoods: [],
+      bigImg: ""
     };
   },
   async created() {
-    let phoneData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let phoneData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "滑板"
       }
     });
-    let beachData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
+    let beachData = await this.$axios.get("http://49.232.25.17:1901/hrl/home", {
       params: {
         title: "沙滩巾"
       }
     });
-    let umbrellaData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
-      params: {
-        title: "雨伞"
+    let umbrellaData = await this.$axios.get(
+      "http://49.232.25.17:1901/hrl/home",
+      {
+        params: {
+          title: "雨伞"
+        }
       }
-    });
-    let suitcaseData = await this.$axios.get("http://127.0.0.1:1901/hrl/home", {
-      params: {
-        title: "旅行箱"
+    );
+    let suitcaseData = await this.$axios.get(
+      "http://49.232.25.17:1901/hrl/home",
+      {
+        params: {
+          title: "旅行箱"
+        }
       }
-    });
+    );
     this.bigImg = phoneData.data.data[0].bigImg;
     this.tripGoods = phoneData.data.data.slice(1, 4);
-    this.beachgoods = beachData.data.data.slice(1,4);
-    this.umbrellagoods = umbrellaData.data.data.slice(1,4);
-    this.suitcasegoods = suitcaseData.data.data.slice(1,4);
+    this.beachgoods = beachData.data.data.slice(1, 4);
+    this.umbrellagoods = umbrellaData.data.data.slice(1, 4);
+    this.suitcasegoods = suitcaseData.data.data.slice(1, 4);
   },
-  methods:{
-    Hgoto(goods_id,path){
-      this.$router.push({path,query:{goods_id}})
+  methods: {
+    Hgoto(goods_id, path) {
+      this.$router.push({ path, query: { goods_id } });
     },
-    gotoAll(path,type){
-       this.$router.push({path,query:{type}})
+    gotoAll(path, type) {
+      this.$router.push({ path, query: { type } });
     }
   }
 };
@@ -135,12 +162,12 @@ export default {
   width: 100%;
   height: 210px;
 }
-.tripBody .boderTop{
-    border-top:20px solid rgba(200, 200, 200, 0.3);
-    width: 100%;
+.tripBody .boderTop {
+  border-top: 20px solid rgba(200, 200, 200, 0.3);
+  width: 100%;
 }
-.tripBody .tripbox .tripboxNav{
-    width: 100%;
+.tripBody .tripbox .tripboxNav {
+  width: 100%;
 }
 .tripBody .tripbox .tripboxNav h2 {
   font-size: 14px;
@@ -160,7 +187,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-.tripBody .tripbox .imgbox .imglist li{
-    padding: 10px;
+.tripBody .tripbox .imgbox .imglist li {
+  padding: 10px;
 }
 </style>

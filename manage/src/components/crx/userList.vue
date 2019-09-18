@@ -71,7 +71,7 @@ export default {
   },
   async beforeMount() {
     let data = await this.$axios.get(
-      "http://127.0.0.1:1901/crx/manage_userGet"
+      "http://49.232.25.17:1901/crx/manage_userGet"
     );
     this.$store.commit("getData", data.data.data);
     this.data = this.$store.state.userlist.data.slice(0, 8);
@@ -88,7 +88,7 @@ export default {
         let result;
         if (this.select === "email") {
           result = await this.$axios.get(
-            "http://127.0.0.1:1901/crx/manage_userGet",
+            "http://49.232.25.17:1901/crx/manage_userGet",
             {
               params: {
                 email: this.input
@@ -97,7 +97,7 @@ export default {
           );
         } else if (this.select === "username") {
           result = await this.$axios.get(
-            "http://127.0.0.1:1901/crx/manage_userGet",
+            "http://49.232.25.17:1901/crx/manage_userGet",
             {
               params: {
                 username: this.input
@@ -106,7 +106,7 @@ export default {
           );
         } else if (this.select === "gender") {
           result = await this.$axios.get(
-            "http://127.0.0.1:1901/crx/manage_userGet",
+            "http://49.232.25.17:1901/crx/manage_userGet",
             {
               params: {
                 gender: this.input
@@ -115,7 +115,7 @@ export default {
           );
         } else if (this.select === "job") {
           result = await this.$axios.get(
-            "http://127.0.0.1:1901/crx/manage_userGet",
+            "http://49.232.25.17:1901/crx/manage_userGet",
             {
               params: {
                 job: this.input
@@ -124,7 +124,7 @@ export default {
           );
         } else if (this.select === "city") {
           result = await this.$axios.get(
-            "http://127.0.0.1:1901/crx/manage_userGet",
+            "http://49.232.25.17:1901/crx/manage_userGet",
             {
               params: {
                 city: this.input
@@ -161,11 +161,14 @@ export default {
         }
         this.pageChange();
         this.multipleSelection.forEach(item => {
-          this.$axios.delete("http://127.0.0.1:1901/crx//manage_userRemove", {
-            params: {
-              _id: item._id
+          this.$axios.delete(
+            "http://49.232.25.17:1901/crx//manage_userRemove",
+            {
+              params: {
+                _id: item._id
+              }
             }
-          });
+          );
         });
       } else {
         alert("权限不足");

@@ -107,7 +107,7 @@ export default {
   async created() {
     let { data } = await this.$axios({
       methods: "get",
-      url: "http://127.0.0.1:1901/spl/designer"
+      url: "http://49.232.25.17:1901/spl/designer"
     });
 
     for (let i = 0; i < data.data.length; i++) {

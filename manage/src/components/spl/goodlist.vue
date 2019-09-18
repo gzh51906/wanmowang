@@ -97,7 +97,7 @@ export default {
   async created() {
     let { data } = await this.$axios({
       methods: "get",
-      url: "http://127.0.0.1:1901/spl/goodlist"
+      url: "http://49.232.25.17:1901/spl/goodlist"
     });
     this.tableData = data.data.slice(0, 6);
     this.total = parseInt((data.data.length / 6) * 10);
@@ -143,7 +143,7 @@ export default {
           return ele.goods_id;
         });
         let { data } = await this.$axios.delete(
-          "http://127.0.0.1:1901/spl/removeMoregoods",
+          "http://49.232.25.17:1901/spl/removeMoregoods",
           {
             params: {
               goods_id: goods_id
@@ -178,7 +178,7 @@ export default {
         this.$store.commit("removeItem", goodsmsg);
         this.changePage();
         let { data } = await this.$axios.delete(
-          "http://127.0.0.1:1901/spl/removegoods",
+          "http://49.232.25.17:1901/spl/removegoods",
           {
             params: {
               _id: goodsmsg.goods_id
@@ -192,7 +192,7 @@ export default {
     async search(val) {
       let { data } = await this.$axios({
         methods: "get",
-        url: "http://127.0.0.1:1901/spl/search",
+        url: "http://49.232.25.17:1901/spl/search",
         params: { val: val }
       });
       this.$store.state.goods.data = data.data;
