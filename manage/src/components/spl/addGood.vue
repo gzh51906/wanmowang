@@ -8,7 +8,7 @@
         <el-input v-model="form.price" placeholder="请输入商品价格" @change="goodprice(form.price)" ></el-input>
       </el-form-item>
       <el-form-item label="商品分类">
-        <el-select v-model="form.type" placeholder="请选择分类" @focus="select(value)">
+        <el-select v-model="form.type" placeholder="请选择分类" @change="select(form.type)">
           <el-option :label="item.value" :value="item.value" v-for="item in options" :key="item.value"></el-option>
         </el-select>
       </el-form-item>
@@ -57,11 +57,13 @@ export default {
   mounted() {
    
     
-    this.goodsmsg = this.$route.query.goodsmsg ;
-    this.form.name = this.goodsmsg.name ;
-    this.form.price = this.goodsmsg.price ;
-    this.url = this.goodsmsg.imgurl
-    this.form.type = this.goodsmsg.type;
+    // this.goodsmsg = this.$route.query.goodsmsg || "";
+    // this.form.name = this.goodsmsg.name || "";
+    // this.form.price = this.goodsmsg.price || "";
+    // this.url =
+    //   this.goodsmsg.imgurl ||
+    //   "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg";
+    // this.form.type = this.goodsmsg.type || "";
     
   
     
@@ -72,14 +74,17 @@ export default {
      
       let {data}= await this.$axios({
         methods:"get",
-        url: "http://127.0.0.1:1901/spl/update",
+        url: "http://127.0.0.1:1901/spl/add",
         params:{
           name:this.form.name,
           type:this.form.type,
           price:this.form.price,
-          _id:this.$route.query.goodsmsg.goods_id
+          image:this.url
+         
         }
       })
+      console.log(data);
+      
       this.$store.state.goods.data = data;
        this.$router.push("/goodlist");
     
@@ -87,12 +92,16 @@ export default {
     },
     select(value){  
       this.form.type=value
+    // console.log(value);
+    
     },
     goodname(value){
     this.form.name=value
+    // console.log(value);
     },
     goodprice(value){
      this.form.price=value
+    // console.log(value);
       
     }
   }

@@ -28,6 +28,7 @@ import Addtype from "../components/hrl/addType.vue";
 // 苏沛龙引入的
 import goodlist from "../components/spl/goodlist.vue"
 import editor from "../components/spl/editor.vue"
+import addGoods from "../components/spl/addGood.vue"
 
 // 实例化路由
 let router = new VueRouter({
@@ -105,7 +106,12 @@ let router = new VueRouter({
         name: "editor",
         path: "/editor",
         component: editor
-    }]
+    },{
+        name:"add",
+        path:"/add",
+        component:addGoods
+    }
+]
 })
 
 // 防止刷新的时候状态消失
