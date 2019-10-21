@@ -119,7 +119,7 @@ export default {
   methods: {
     goto() {
       if (this.$store.state.common.insert) {
-        this.$router.push("/editor");
+        this.$router.push("/add");
       } else {
         alert("权限不足");
       }
