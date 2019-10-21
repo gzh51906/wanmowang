@@ -46,6 +46,7 @@
 ![avatar](http://49.232.25.17:1901/img/gouwuche2.png)![avatar](http://49.232.25.17:1901/img/gouwuche4.png)
 
 ### 项目目录说明
+```
 team_vueproject/
 ├── client/
 │   ├── babel.config.js
@@ -169,6 +170,6 @@ team_vueproject/
 │   │       └── Lgoodlist.js
 │   └── server.js
 └── tree.txt
-
+```
 
 
